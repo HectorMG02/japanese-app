@@ -24,6 +24,13 @@ html, body{
     overflow-y: auto!important;
 }
 
+.navBar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
 .quiz-hiragana{
     height: 13%;
     overflow-y: auto;
@@ -53,6 +60,15 @@ html, body{
 .spanTotalExamen{
     margin-left: 20px;
 }
+
+.h1Kana{
+    font-size: 4.5em;
+  }
+
+  .h1Romaji{
+    background: #7a9ffa;
+    font-size: 3em;
+  }
 
 /* media query for mobile devices */
 @media (max-width: 1200px){

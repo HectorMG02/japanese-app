@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MainService } from '../main/service/main.service';
 
 @Component({
   selector: 'app-katakana',
   templateUrl: './katakana.component.html',
   styles: [
+    `
+    
+    `
   ]
 })
-export class KatakanaComponent implements OnInit {
+export class KatakanaComponent {
 
-  constructor() { }
+  constructor(public mainService: MainService) { }
 
-  ngOnInit(): void {
-  }
+  katakana = this.mainService.katakana;
 
 }
