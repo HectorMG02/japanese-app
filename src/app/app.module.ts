@@ -12,6 +12,8 @@ import { KanjiComponent } from './kanji/kanji.component';
 import { VocabularioComponent } from './vocabulario/vocabulario.component';
 import { GramaticaComponent } from './gramatica/gramatica.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
