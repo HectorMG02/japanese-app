@@ -25,7 +25,7 @@ html, body{
 }
 
 .quiz-hiragana{
-    height: 9.6%;
+    height: 8.6%;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -33,7 +33,7 @@ html, body{
 }
 
 .quiz-katakana{
-    height: 4.5%;
+    height: 3.9%;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -42,7 +42,7 @@ html, body{
 
 
 .quiz-kanji{
-    height: 4.25%;
+    height: 3.85%;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -50,6 +50,9 @@ html, body{
 }
 
  
+.spanTotalExamen{
+    margin-left: 20px;
+}
 
 /* media query for mobile devices */
 @media (max-width: 1200px){
