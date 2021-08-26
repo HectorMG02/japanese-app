@@ -1,0 +1,50 @@
+<mat-toolbar class="navBar">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">book</mat-icon>
+    </button>
+    <button mat-button>
+        <h5>Japanese app</h5>
+    </button>
+
+    <div class="itemsMenu">
+        <button mat-button class="menuButton">
+            <h5>Hiragana<br>あ</h5>
+        </button>
+
+        <button mat-button class="menuButton">
+            <h5>Katakana<br>ア</h5>
+        </button>
+
+        <button mat-button class="menuButton">
+            <h5>Kanji<br>日本</h5>
+        </button>
+
+        <button mat-button class="menuButton">
+            <h5>Vocabulario<br>&nbsp;&nbsp;ありがとう！</h5>
+        </button>
+
+
+        <button mat-button class="menuButton">
+            <h5>Gramática<br>に、は、て</h5>
+        </button>
+
+        <button mat-button class="menuButton">
+            <h5>Iniciar sesión<br>Registrarme</h5>
+        </button>
+    </div>
+
+    <div class="dropdownIcon btnMenuMovil">
+
+        <button mat-button [matMenuTriggerFor]="beforeMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button *ngFor="let item of menuItems; let i = index" mat-menu-item>
+                {{ item }}
+            </button>
+        </mat-menu>
+    </div>
+
+
+
+</mat-toolbar>

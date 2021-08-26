@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.itemsMenu{
+    margin-left: 100px;
+}
+
+.menuButton{
+    background-color: #272626;
+    margin-left: 10px!important;
+}
+
+
+.dropdownIcon{
+    display: none;
+}
+
+/* media query for mobile devices */
+@media (max-width: 1200px){
+    .itemsMenu{
+        display: none;
+    }
+
+    .dropdownIcon{
+        display: block; 
+    }
+
+    .btnMenuMovil{
+        margin-left: 80%!important;
+    }
+    
+}
+
+
+@media (max-width: 600px){
+ 
+    .btnMenuMovil{
+        margin-left: 50%!important;
+    }
+    
+}
