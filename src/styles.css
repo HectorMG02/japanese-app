@@ -20,6 +20,37 @@ html, body{
     display: none;
 }
 
+.quizs{
+    overflow-y: auto!important;
+}
+
+.quiz-hiragana{
+    height: 9.6%;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-x: hidden;
+}
+
+.quiz-katakana{
+    height: 4.5%;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-x: hidden;    
+}
+
+
+.quiz-kanji{
+    height: 4.25%;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-x: hidden;    
+}
+
+ 
+
 /* media query for mobile devices */
 @media (max-width: 1200px){
     .itemsMenu{
@@ -33,7 +64,20 @@ html, body{
     .btnMenuMovil{
         margin-left: 80%!important;
     }
+
+    .quiz-hiragana{
+        height: 4%;
+    }
     
+    .quiz-katakana{
+        height: 1.8%;    
+    }
+    
+    
+    .quiz-kanji{    
+        height: 1.78%;    
+    }
+
 }
 
 
@@ -42,5 +86,20 @@ html, body{
     .btnMenuMovil{
         margin-left: 50%!important;
     }
+
+    .quiz-hiragana{
+        height: 2.15%;
+    }
     
+    .quiz-katakana{
+        height: 1%;    
+    }
+    
+    
+    .quiz-kanji{    
+        height: 0.93%;    
+    }
+    
+
+   
 }

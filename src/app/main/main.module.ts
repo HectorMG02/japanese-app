@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    QuizComponent
+  ],
   imports: [
     CommonModule
   ]
