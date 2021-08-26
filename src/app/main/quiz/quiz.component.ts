@@ -60,7 +60,7 @@ export class QuizComponent {
     if (romaji === solution && !existe.length) {
       this.aciertos++;
       this.acertados.push({ tipo: tipo, value: solution });
-      this.openSnackBar('Hacertaste (^^)');
+      this.openSnackBar('Acertaste (^^)');
 
       // quit the focus from the event
       event.target.blur();

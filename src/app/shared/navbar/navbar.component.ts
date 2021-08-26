@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+interface MenuItems {
+  nombre: string;
+  ruta: string;
+}
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +18,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  menuItems: string[] = ['あ Hiragana', 'ア Katakana', '日本 Kanji', 'Vocabulario', 'Gramática', 'Login/Registro'];
+  menuItems: MenuItems[] = [
+    {
+      nombre: 'あ Hiragana',
+      ruta: '/hiragana'
+    },
+    {
+      nombre: 'ア Katakana',
+      ruta: '/katakana'
+    },
+    {
+      nombre: '日本 Kanji',
+      ruta: '/kanji'
+    },
+    {
+      nombre: 'Vocabulario',
+      ruta: '/vocabulario'
+    },
+    {
+      nombre: 'Gramática',
+      ruta: '/gramatica'
+    },
+    {
+      nombre: 'Login/registro',
+      ruta: '/iniciarSesion'
+    }
+  ];
+
 
   constructor() { }
 
