@@ -1,7 +1,7 @@
 <div class="row">
     <p>
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle selected value="bold" (click)="changeMode('Estudio')" class="mat-button-toggle-checked">
+            <mat-button-toggle selected value="bold" (click)="changeMode('Estudio')">
                 Estudio</mat-button-toggle>
             <mat-button-toggle (click)="changeMode('Examen')" value="italic">Examen</mat-button-toggle>
             <h3><span class="spanTotalExamen" *ngIf="modoQuiz=='Examen'">{{ aciertos }} / {{ hiragana.length +

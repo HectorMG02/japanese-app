@@ -1,1 +1,58 @@
-<p>vocabulario works!</p>
+<p>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle selected value="bold" (click)="changeMode('Estudio')">
+            Estudio</mat-button-toggle>
+        <mat-button-toggle (click)="changeMode('Examen')" value="italic">Examen</mat-button-toggle>
+        <h3><span class="spanTotalExamen" *ngIf="modoQuiz=='Examen'">{{ aciertos }} / {{ totalDatos }}</span>
+        </h3>
+    </mat-button-toggle-group>
+</p>
+
+<div class="row">
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar" formControlName="buscar" (input)="filtro()" />
+    </form>
+
+    <div *ngFor="let dato of datos" class="col-5 my-3 mx-5 colVocabulario">
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <h5 class="my-2"><strong>
+                        <u>{{ dato.categoria }}</u>
+                    </strong></h5>
+            </div>
+        </div>
+
+        <div class="zonaTabla">
+            <table class="table">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">Kana</th>
+                        <th scope="col">Significado</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr *ngFor="let v of dato.datos">
+                        <th scope="row">{{ v.kana }}</th>
+                        <td>
+                            <input *ngIf="modoQuiz=='Estudio';else modoExamen" disabled type="text"
+                                class="w-70 form-control text-center" value="{{ v.significado }}">
+
+                            <ng-template #modoExamen>
+                                <input type="text" class="w-70 form-control text-center"
+                                    (keyup)="checkRomaji(v.significado, $event)">
+                            </ng-template>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<mat-form-field style="display: none">
+    <mat-label>Message</mat-label>
+    <input matInput #message>
+</mat-form-field>

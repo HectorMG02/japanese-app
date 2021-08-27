@@ -1,0 +1,86 @@
+[
+    {
+        "kana": "ありがとう",
+        "significado": "gracias",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "ありがとうございます",
+        "significado": "muchas gracias",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "わたし",
+        "significado": "yo",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おねがいします",
+        "significado": "te lo agradezco",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "いつ",
+        "significado": "cuando",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おととい",
+        "significado": "ayer",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "けさい",
+        "significado": "día de descanso",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おかえり",
+        "significado": "buen día",
+        "categoria": "prueba 2"
+    },
+    {
+        "kana": "をを",
+        "significado": "xd",
+        "categoria": "prueba 2"
+    },
+    {
+        "kana": "おやすみなさい",
+        "significado": "buenas noches",
+        "categoria": "prueba 2"
+    },
+    {
+        "kana": "おつかれさま",
+        "significado": "gracias",
+        "categoria": "prueba 3"
+    },
+    {
+        "kana": "おつかれさまでした",
+        "significado": "gracias",
+        "categoria": "prueba 3"
+    },
+    {
+        "kana": "おつき",
+        "significado": "hora",
+        "categoria": "prueba 3"
+    },
+    {
+        "kana": "おつけ",
+        "significado": "hora",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おつや",
+        "significado": "hora",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おつり",
+        "significado": "cambio",
+        "categoria": "prueba 1"
+    },
+    {
+        "kana": "おつり",
+        "significado": "cambio"
+    }
+]

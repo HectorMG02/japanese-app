@@ -106,15 +106,17 @@ html, body {
 
 @media (max-width: 600px) {
     .btnMenuMovil {
-        margin-left: 50%!important;
+        margin-left: 25%!important;
     }
     .quiz-hiragana {
-        height: 2.15%;
+        height: 4.15%;
     }
     .quiz-katakana {
-        height: 1%;
+        height: 2%;
+        margin-right: -1px;
     }
     .quiz-kanji {
-        height: 0.93%;
+        height: 1.8%;
+        margin-right: -1px;
     }
 }

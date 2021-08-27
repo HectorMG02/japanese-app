@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface Kana {
   id: number;
@@ -15,7 +15,7 @@ interface Kana {
 })
 export class MainService {
 
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { }
 
 
   hiragana: Kana[] = [
@@ -181,4 +181,10 @@ export class MainService {
     { id: 12, kana: '千', romaji: 'sen', significado: "mil" },
   ];
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message);
+    setTimeout(() => {
+      this._snackBar.dismiss();
+    }, 1500);
+  }
 }

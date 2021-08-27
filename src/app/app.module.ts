@@ -13,6 +13,7 @@ import { VocabularioComponent } from './vocabulario/vocabulario.component';
 import { GramaticaComponent } from './gramatica/gramatica.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -32,7 +33,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

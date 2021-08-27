@@ -60,7 +60,7 @@ export class QuizComponent {
     if (romaji === solution && !existe.length) {
       this.aciertos++;
       this.acertados.push({ tipo: tipo, value: solution });
-      this.openSnackBar('Acertaste (^^)');
+      this.mainService.openSnackBar('Acertaste (^^)');
 
       // quit the focus from the event
       event.target.blur();
@@ -77,10 +77,5 @@ export class QuizComponent {
 
 
 
-  openSnackBar(message: string) {
-    this._snackBar.open(message);
-    setTimeout(() => {
-      this._snackBar.dismiss();
-    }, 1500);
-  }
+
 }
