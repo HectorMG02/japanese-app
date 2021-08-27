@@ -23,7 +23,8 @@
             <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-            <button *ngFor="let item of menuItems;" mat-menu-item>
+            <button *ngFor="let item of menuItems;" mat-menu-item [routerLink]="[ item.ruta ]"
+                routerLinkActive="active">
                 {{ item.nombre }}
             </button>
         </mat-menu>
