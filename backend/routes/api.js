@@ -21,7 +21,17 @@ router.post('/getGramatica', (req, res) => {
 });
 
 
+router.post('/loginAdmin', (req, res) => {
+    const rawdata = fs.readFileSync('db/login.json');
+    const loginData = JSON.parse(rawdata);
 
+    if (req.body.user === loginData.user && req.body.password === loginData.password) {
+        return res.json(1)
+    } else {
+        return res.json(0)
+    }
+
+});
 
 
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MainService } from 'src/app/main/service/main.service';
 
 interface MenuItems {
   nombre: string;
@@ -26,7 +27,8 @@ interface MenuItems {
     `
   ]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+
 
   menuItems: MenuItems[] = [
     {
@@ -56,9 +58,15 @@ export class NavbarComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  admin: number = this.mainService.admin;
 
-  ngOnInit(): void {
+  constructor(public mainService: MainService) { }
+
+
+  logout() {
+    localStorage.removeItem("loginAdmin");
+
+    return location.href = '/iniciarSesion'
   }
 
 }

@@ -81,6 +81,13 @@ html, body {
     width: 100%;
 }
 
+.container-login {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    width: 70%;
+}
+
 /* media query for mobile devices */
 
 @media (max-width: 1200px) {
@@ -95,6 +102,9 @@ html, body {
     }
     .quiz-kanji {
         max-height: 500px;
+    }
+    .container-login {
+        width: 100%;
     }
 }
 
@@ -118,5 +128,8 @@ html, body {
     }
     .colVocabulario {
         width: 90%;
+    }
+    .container-login {
+        width: 100%;
     }
 }

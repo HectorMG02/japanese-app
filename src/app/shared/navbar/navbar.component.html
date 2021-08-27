@@ -17,7 +17,13 @@
 
             <ng-template #administracion>
                 <h5>
-                    <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;{{ item.nombre }}
+                    <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span
+                        *ngIf="!admin; else modoAdmin">{{ item.nombre
+                        }}</span>
+                    <ng-template #modoAdmin>
+                        <span (click)="logout()">Cerrar Sesión</span>
+                    </ng-template>
+
                 </h5>
             </ng-template>
 

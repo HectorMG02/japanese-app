@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 interface Kana {
   id: number;
@@ -15,8 +16,11 @@ interface Kana {
 })
 export class MainService {
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient,
+    private _snackBar: MatSnackBar) { }
 
+  login_status: number = 0;
+  admin: number = localStorage.getItem('loginAdmin') ? 1 : 0;
 
   hiragana: Kana[] = [
     { id: 1, kana: 'あ', romaji: 'a' },
@@ -187,4 +191,23 @@ export class MainService {
       this._snackBar.dismiss();
     }, 1500);
   }
+
+  login(user: string, password: string) {
+    const url = 'http://localhost:3030/api/loginAdmin';
+
+    const data = {
+      user: user,
+      password: password,
+    };
+
+
+
+    this.http.post<any[]>(url, data)
+      .subscribe(result => {
+        this.login_status = Number(result);
+      });
+
+    return this.login_status;
+  }
+
 }
