@@ -13,6 +13,16 @@ interface MenuItems {
     .example-spacer {
       flex: 1 1 auto;
     }
+
+    .admin_movil{
+      margin-right: 5px!important;
+    }
+
+    .adminPc{
+      margin-top: 4px;
+      position: absolute;
+      left: 0;
+    }
     `
   ]
 })
@@ -40,7 +50,7 @@ export class NavbarComponent implements OnInit {
       ruta: '/gramatica'
     },
     {
-      nombre: 'Login/registro',
+      nombre: 'Administración',
       ruta: '/iniciarSesion'
     }
   ];

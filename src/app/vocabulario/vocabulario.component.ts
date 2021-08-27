@@ -40,6 +40,33 @@ interface Datos {
         max-height:300px;
         overflow-y  : auto!important;
       }
+
+
+      .zonaTabla::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+    
+      .zonaTabla::-webkit-scrollbar:vertical {
+          width:10px;
+      }
+
+      .zonaTabla::-webkit-scrollbar-button:increment,.zonaTabla::-webkit-scrollbar-button {
+        display: none;
+      } 
+      
+      .zonaTabla::-webkit-scrollbar:horizontal {
+          height: 10px;
+      }
+      
+      .zonaTabla::-webkit-scrollbar-thumb {
+          background-color: #797979;
+          border-radius: 20px;
+          border: 2px solid #f1f2f3;
+      }
+      
+      .zonaTabla::-webkit-scrollbar-track {
+          border-radius: 10px;  
+      }
     `
   ]
 })

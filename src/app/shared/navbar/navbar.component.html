@@ -11,7 +11,16 @@
     <div class="itemsMenu">
         <button *ngFor="let item of menuItems;" mat-button class="menuButton" [routerLink]="[ item.ruta ]"
             routerLinkActive="active">
-            <h5>{{ item.nombre }}</h5>
+
+            <h5 *ngIf="item.nombre != 'Administración'; else administracion">{{ item.nombre }}</h5>
+
+
+            <ng-template #administracion>
+                <h5>
+                    <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;{{ item.nombre }}
+                </h5>
+            </ng-template>
+
         </button>
 
 
@@ -25,7 +34,14 @@
         <mat-menu #beforeMenu="matMenu" xPosition="before">
             <button *ngFor="let item of menuItems;" mat-menu-item [routerLink]="[ item.ruta ]"
                 routerLinkActive="active">
-                {{ item.nombre }}
+
+                <span *ngIf="item.nombre != 'Administración'; else administracionMovil">{{ item.nombre }}</span>
+
+                <ng-template #administracionMovil>
+                    <mat-icon class="admin_movil">account_circle</mat-icon>{{ item.nombre }}
+                </ng-template>
+
+
             </button>
         </mat-menu>
     </div>

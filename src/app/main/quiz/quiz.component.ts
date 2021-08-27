@@ -11,6 +11,15 @@ interface Acertados {
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styles: [
+    `
+      .h1RomajiKanjiQuiz{
+        font-size: 1.5em;
+        background: #7a9ffa;
+        width: 100%;
+        height: 100%;
+        padding-top: 12px; 
+      }
+    `
   ]
 })
 export class QuizComponent {

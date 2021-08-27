@@ -30,8 +30,16 @@ html, body {
     z-index: 999;
 }
 
+.quiz-kanji {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-x: hidden;
+}
+
 .quiz-hiragana {
-    height: 13%;
+    max-height: 220px;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -39,15 +47,7 @@ html, body {
 }
 
 .quiz-katakana {
-    height: 5.9%;
-    overflow-y: auto;
-    border: 2px solid black;
-    border-radius: 10px;
-    overflow-x: hidden;
-}
-
-.quiz-kanji {
-    height: 5.9%;
+    max-height: 225px;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
@@ -81,8 +81,6 @@ html, body {
     width: 100%;
 }
 
-.colVocabulario {}
-
 /* media query for mobile devices */
 
 @media (max-width: 1200px) {
@@ -95,14 +93,8 @@ html, body {
     .btnMenuMovil {
         margin-left: 70%!important;
     }
-    .quiz-hiragana {
-        height: 4%;
-    }
-    .quiz-katakana {
-        height: 1.8%;
-    }
     .quiz-kanji {
-        height: 1.78%;
+        max-height: 500px;
     }
 }
 
@@ -110,16 +102,19 @@ html, body {
     .btnMenuMovil {
         margin-left: 25%!important;
     }
+    .quiz-kanji {
+        width: 100%;
+        margin-right: -1px;
+    }
     .quiz-hiragana {
-        height: 4.15%;
+        margin-right: 1px;
+        margin-left: 1px;
+        max-height: 500px!important;
     }
     .quiz-katakana {
-        height: 2%;
-        margin-right: -1px;
-    }
-    .quiz-kanji {
-        height: 1.8%;
-        margin-right: -1px;
+        margin-right: 1px;
+        margin-left: 1px;
+        max-height: 500px!important;
     }
     .colVocabulario {
         width: 90%;
