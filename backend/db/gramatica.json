@@ -1,0 +1,27 @@
+[
+    {
+        "particula": "は",
+        "pronunciacion": "wa",
+        "info": "se puede usar para definir el tema de la conversación"
+    },
+    {
+        "particula": "へ",
+        "pronunciacion": "he",
+        "info": "se puede usar para definir el tema de la conversación"
+    },
+    {
+        "particula": "へん",
+        "pronunciacion": "hen",
+        "info": "se puede usar para definir el tema de la conversación"
+    },
+    {
+        "particula": "へんか",
+        "pronunciacion": "henka",
+        "info": "se puede usar para definir el tema de la conversación"
+    },
+    {
+        "particula": "へんじょ",
+        "pronunciacion": "henjyo",
+        "info": "se puede usar para definir el tema de la conversación"
+    }
+]

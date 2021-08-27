@@ -1,1 +1,49 @@
-<p>gramatica works!</p>
+<div class="row">
+
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar" formControlName="buscar" (input)="filtro()" />
+    </form>
+
+    <div *ngFor="let particula of gramatica; let index = index" class="col-lg-4 col-md-6 col-xs-12 my-3">
+        <cdk-accordion class="example-accordion">
+            <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button"
+                tabindex="0" [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                [attr.aria-controls]="'accordion-body-' + index">
+                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                    <h3> {{ particula.particula }}</h3>
+                    <span class="example-accordion-item-description">
+
+
+                        <svg *ngIf="!accordionItem.expanded; else ocultar" height="10pt" viewBox="0 0 448 448"
+                            width="10pt" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m408 184h-136c-4.417969 0-8-3.582031-8-8v-136c0-22.089844-17.910156-40-40-40s-40 17.910156-40 40v136c0 4.417969-3.582031 8-8 8h-136c-22.089844 0-40 17.910156-40 40s17.910156 40 40 40h136c4.417969 0 8 3.582031 8 8v136c0 22.089844 17.910156 40 40 40s40-17.910156 40-40v-136c0-4.417969 3.582031-8 8-8h136c22.089844 0 40-17.910156 40-40s-17.910156-40-40-40zm0 0" />
+                        </svg>
+
+
+
+                        <ng-template #ocultar>
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="10pt" height="10pt"
+                                viewBox="0 0 124 124" style="enable-background:new 0 0 124 124;" xml:space="preserve">
+                                <g>
+                                    <path
+                                        d="M112,50H12C5.4,50,0,55.4,0,62c0,6.6,5.4,12,12,12h100c6.6,0,12-5.4,12-12C124,55.4,118.6,50,112,50z" />
+                                </g>
+                            </svg>
+
+                        </ng-template>
+
+
+                    </span>
+                </div>
+                <div class="example-accordion-item-body" role="region"
+                    [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                    [attr.aria-labelledby]="'accordion-header-' + index">
+                    <hr class="hrInfo">
+                    <h4> {{ particula.info }}</h4>
+                </div>
+            </cdk-accordion-item>
+        </cdk-accordion>
+    </div>
+</div>

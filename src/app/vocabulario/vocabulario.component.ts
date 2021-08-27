@@ -45,9 +45,10 @@ interface Datos {
 })
 export class VocabularioComponent {
 
-  vocabulario!: Vocabulario[];
+  vocabulario: Vocabulario[];
   categorias: string[] = [];
   datos: Datos[] = [];
+  copiaDatos: Datos[] = [];
 
   modoQuiz: string = "Estudio";
   aciertos: number = 0;
@@ -107,7 +108,9 @@ export class VocabularioComponent {
 
         this.datos.forEach(d => {
           this.totalDatos += d.datos.length;
-        })
+        });
+
+        this.copiaDatos = this.datos;
 
       });
   }
@@ -116,10 +119,9 @@ export class VocabularioComponent {
     const buscar = this.miFormulario.value.buscar;
 
     if (buscar) {
-      this.datos = this.datos.filter(d => d.categoria.toLowerCase().includes(buscar.toLowerCase()) || d.datos.filter(v => v.kana.toLowerCase().includes(buscar.toLowerCase()) || v.significado.toLowerCase().includes(buscar.toLowerCase())).length > 0);
+      this.datos = this.copiaDatos.filter(d => d.categoria.toLowerCase().includes(buscar.toLowerCase()) || d.datos.filter(v => v.kana.toLowerCase().includes(buscar.toLowerCase()) || v.significado.toLowerCase().includes(buscar.toLowerCase())).length > 0);
     } else {
-      this.datos = [];
-      this.getVocabulario();
+      this.datos = this.copiaDatos
     }
 
   }

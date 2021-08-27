@@ -13,6 +13,14 @@ router.post('/getVocabulario', (req, res,) => {
 });
 
 
+router.post('/getGramatica', (req, res) => {
+    const rawdata = fs.readFileSync('db/gramatica.json');
+    const gramatica = JSON.parse(rawdata);
+
+    return res.status(200).json(gramatica);
+});
+
+
 
 
 
