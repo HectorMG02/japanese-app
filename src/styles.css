@@ -81,6 +81,8 @@ html, body {
     width: 100%;
 }
 
+.colVocabulario {}
+
 /* media query for mobile devices */
 
 @media (max-width: 1200px) {
@@ -118,5 +120,8 @@ html, body {
     .quiz-kanji {
         height: 1.8%;
         margin-right: -1px;
+    }
+    .colVocabulario {
+        width: 90%;
     }
 }

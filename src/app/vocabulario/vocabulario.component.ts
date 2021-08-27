@@ -32,6 +32,7 @@ interface Datos {
       .colVocabulario{
         border: 2px solid black;
         border-radius: 20px;
+        margin-left: 5%!important;
       }
 
       .zonaTabla{

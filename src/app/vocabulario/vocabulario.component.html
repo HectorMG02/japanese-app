@@ -13,7 +13,7 @@
         <input type="text" class="form-control" placeholder="Buscar" formControlName="buscar" (input)="filtro()" />
     </form>
 
-    <div *ngFor="let dato of datos" class="col-5 my-3 mx-5 colVocabulario">
+    <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-xs-12 colVocabulario">
 
         <div class="row">
             <div class="col-12 text-center">
@@ -27,7 +27,7 @@
             <table class="table">
                 <thead class="thead-dark text-center">
                     <tr>
-                        <th scope="col">Kana</th>
+                        <th scope="col">Palabra / Frase</th>
                         <th scope="col">Significado</th>
                     </tr>
                 </thead>
