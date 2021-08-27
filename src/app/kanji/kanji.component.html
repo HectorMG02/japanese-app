@@ -1,1 +1,32 @@
-<p>kanji works!</p>
+<div class="row">
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar kanji" formControlName="buscar"
+            (input)="filtro()" />
+    </form>
+    <div class="col-4 my-3" *ngFor="let item of kanji">
+        <mat-card>
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="h1Kana text-center">
+                        {{ item.kana }}
+                    </h1>
+                </div>
+                <div class="col-6">
+                    <span class="text-center">
+                        <h1 class="h1RomajiKanji">
+                            {{ item.romaji }}
+                        </h1>
+                    </span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 significadoKanji ml-2 mr-2 text-center">
+                    <span>
+                        {{ item.significado }}
+                    </span>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

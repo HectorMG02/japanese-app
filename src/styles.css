@@ -1,37 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/purple-green.css';
 
-html, body{
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+html, body {
     width: 100%;
     height: 100%;
 }
 
-.itemsMenu{
+.itemsMenu {
     margin-left: 100px;
 }
 
-.menuButton{
+.menuButton {
     background-color: #272626;
     margin-left: 10px!important;
 }
 
-
-.dropdownIcon{
+.dropdownIcon {
     display: none;
 }
 
-.quizs{
+.quizs {
     overflow-y: auto!important;
 }
 
-.navBar{
+.navBar {
     position: fixed;
     top: 0;
     bottom: 0;
     z-index: 999;
 }
 
-.quiz-hiragana{
+.quiz-hiragana {
     height: 13%;
     overflow-y: auto;
     border: 2px solid black;
@@ -39,86 +38,83 @@ html, body{
     overflow-x: hidden;
 }
 
-.quiz-katakana{
+.quiz-katakana {
     height: 5.9%;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
-    overflow-x: hidden;    
+    overflow-x: hidden;
 }
 
-
-.quiz-kanji{
+.quiz-kanji {
     height: 5.9%;
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 10px;
-    overflow-x: hidden;    
+    overflow-x: hidden;
 }
 
- 
-.spanTotalExamen{
+.spanTotalExamen {
     margin-left: 20px;
 }
 
-.h1Kana{
+.h1Kana {
     font-size: 4.5em;
-  }
-
-  .h1Romaji{
-    background: #7a9ffa;
-    font-size: 3em;
-  }
-
-/* media query for mobile devices */
-@media (max-width: 1200px){
-    .itemsMenu{
-        display: none;
-    }
-
-    .dropdownIcon{
-        display: block; 
-    }
-
-    .btnMenuMovil{
-        margin-left: 80%!important;
-    }
-
-    .quiz-hiragana{
-        height: 4%;
-    }
-    
-    .quiz-katakana{
-        height: 1.8%;    
-    }
-    
-    
-    .quiz-kanji{    
-        height: 1.78%;    
-    }
-
 }
 
+.h1Romaji {
+    background: #7a9ffa;
+    font-size: 3em;
+}
 
-@media (max-width: 600px){
- 
-    .btnMenuMovil{
+.h1RomajiKanji {
+    background: #7a9ffa;
+    font-size: 3em;
+    height: 100%;
+    padding-top: 20px;
+}
+
+.significadoKanji {
+    font-size: 3em;
+    background: #252724;
+    padding: 10px;
+    width: 100%;
+}
+
+/* media query for mobile devices */
+
+@media (max-width: 1200px) {
+    .itemsMenu {
+        display: none;
+    }
+    .dropdownIcon {
+        display: block;
+    }
+    .btnMenuMovil {
+        margin-left: 80%!important;
+    }
+    .quiz-hiragana {
+        height: 4%;
+    }
+    .quiz-katakana {
+        height: 1.8%;
+    }
+    .quiz-kanji {
+        height: 1.78%;
+    }
+}
+
+@media (max-width: 600px) {
+    .btnMenuMovil {
         margin-left: 50%!important;
     }
-
-    .quiz-hiragana{
+    .quiz-hiragana {
         height: 2.15%;
     }
-    
-    .quiz-katakana{
-        height: 1%;    
+    .quiz-katakana {
+        height: 1%;
     }
-    
-    
-    .quiz-kanji{    
-        height: 0.93%;    
+    .quiz-kanji {
+        height: 0.93%;
     }
-    
-
-   
 }

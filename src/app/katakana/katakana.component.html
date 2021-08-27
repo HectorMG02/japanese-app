@@ -1,4 +1,8 @@
 <div class="row">
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar katakana" formControlName="buscar"
+            (input)="filtro()" />
+    </form>
     <div class="col-4 my-3" *ngFor="let item of katakana">
         <mat-card>
             <h1 class="h1Kana text-center">

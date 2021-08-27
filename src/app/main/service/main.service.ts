@@ -5,7 +5,10 @@ interface Kana {
   id: number;
   kana: string;
   romaji: string;
+  significado?: string;
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -164,29 +167,18 @@ export class MainService {
   ];
 
   kanji: Kana[] = [
-    { id: 1, kana: '一', romaji: 'ichi' },
-    { id: 2, kana: '二', romaji: 'ni' },
-    { id: 3, kana: '三', romaji: 'san' },
-    { id: 4, kana: '四', romaji: 'shi' },
-    { id: 5, kana: '五', romaji: 'go' },
-    { id: 6, kana: '六', romaji: 'roku' },
-    { id: 7, kana: '七', romaji: 'shichi' },
-    { id: 8, kana: '八', romaji: 'hachi' },
-    { id: 9, kana: '九', romaji: 'kyu' },
-    { id: 10, kana: '十', romaji: 'juu' },
-    { id: 11, kana: '子', romaji: 'zi' },
-    { id: 12, kana: '丑', romaji: 'chou' },
-    { id: 13, kana: '寅', romaji: 'nyuu' },
-    { id: 14, kana: '卯', romaji: 'maku' },
-    { id: 15, kana: '辰', romaji: 'sentou' },
-    { id: 16, kana: '巳', romaji: 'shin' },
-    { id: 17, kana: '午', romaji: 'gou' },
-    { id: 18, kana: '未', romaji: 'mi' },
-    { id: 19, kana: '申', romaji: 'shin' },
-    { id: 20, kana: '酉', romaji: 'you' },
-    { id: 21, kana: '戌', romaji: 'ju' },
-    { id: 22, kana: '亥', romaji: 'hai' },
-    { id: 23, kana: '子', romaji: 'zi' },
+    { id: 1, kana: '一', romaji: 'ichi', significado: "uno" },
+    { id: 2, kana: '二', romaji: 'ni', significado: "dos" },
+    { id: 3, kana: '三', romaji: 'san', significado: "tres" },
+    { id: 4, kana: '四', romaji: 'shi', significado: "cuatro" },
+    { id: 5, kana: '五', romaji: 'go', significado: "cinco" },
+    { id: 6, kana: '六', romaji: 'roku', significado: "seis" },
+    { id: 7, kana: '七', romaji: 'nana', significado: "siete" },
+    { id: 8, kana: '八', romaji: 'hachi', significado: "ocho" },
+    { id: 9, kana: '九', romaji: 'kyu', significado: "nueve" },
+    { id: 10, kana: '十', romaji: 'ju', significado: "diez" },
+    { id: 11, kana: '百', romaji: 'hyaku', significado: "cien" },
+    { id: 12, kana: '千', romaji: 'sen', significado: "mil" },
   ];
 
 }
