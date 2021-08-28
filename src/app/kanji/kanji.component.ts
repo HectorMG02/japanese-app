@@ -31,7 +31,7 @@ export class KanjiComponent {
     const buscar = this.miFormulario.value.buscar;
     console.log(buscar, this.kanji);
     if (buscar) {
-      //this.kanji = this.mainService.kanji.filter(h => h.kana.toLowerCase().includes(buscar) || h.romaji.toLocaleLowerCase().includes(buscar) || h.significado?.toLocaleLowerCase().includes(buscar));
+      this.kanji = this.mainService.kanji.filter((h: any) => h.kana.toLowerCase().includes(buscar) || h.romaji.toLocaleLowerCase().includes(buscar) || h.significado?.toLocaleLowerCase().includes(buscar));
     } else {
       this.kanji = this.mainService.kanji;
     }
@@ -40,7 +40,8 @@ export class KanjiComponent {
 
   deleteKanji(item: any) {
     if (confirm(`¿Estás seguro de que quieres eliminar el kanji: ${item.kana}`)) {
-      return
+      this.mainService.deleteKanji(item);
+      this.kanji = this.kanji.filter((h: any) => h.id !== item.id);
     }
 
   }

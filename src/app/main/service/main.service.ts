@@ -206,4 +206,12 @@ export class MainService {
     return this.login_status;
   }
 
+  deleteKanji(item: Kana) {
+    this.http.post(`${this.url}/deleteKanji/`, item)
+      .subscribe((result: any) => {
+        this.kanji = [];
+        result.forEach((r: any) => this.kanji.push(r));
+      });
+  }
+
 }

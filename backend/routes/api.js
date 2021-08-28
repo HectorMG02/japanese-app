@@ -37,8 +37,23 @@ router.post('/loginAdmin', (req, res) => {
 router.post('/getKanjis', (req, res) => {
     const rawdata = fs.readFileSync('db/kanjis.json');
     const kanjis = JSON.parse(rawdata);
-    console.log(kanjis);
+
     return res.status(200).json(kanjis);
+});
+
+router.post('/deleteKanji', (req, res) => {
+    const rawdata = fs.readFileSync('db/kanjis.json');
+    const kanjis = JSON.parse(rawdata);
+
+    const idEliminar = req.body.id;
+
+    let nuevosKanjis = kanjis.filter(k => k.id != idEliminar);
+
+    if (nuevosKanjis.length) {
+        fs.writeFileSync('db/kanjis.json', JSON.stringify(nuevosKanjis));
+    }
+
+    return res.status(200).json(nuevosKanjis);
 });
 
 
