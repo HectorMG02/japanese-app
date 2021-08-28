@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
 
 @Component({
@@ -17,6 +17,12 @@ export class KanjiComponent {
 
   miFormulario: FormGroup = this.fb.group({
     buscar: [''],
+  });
+
+  formularioNuevoKanji: FormGroup = this.fb.group({
+    kana: ['', [Validators.required]],
+    romaji: ['', [Validators.required]],
+    significado: ['', [Validators.required]]
   });
 
   adminMode = this.mainService.admin;
@@ -44,6 +50,15 @@ export class KanjiComponent {
       this.kanji = this.kanji.filter((h: any) => h.id !== item.id);
     }
 
+  }
+
+  crearKanji() {
+    let data = this.formularioNuevoKanji.value;
+    data.id = this.kanji.length + 1;
+
+    this.mainService.crearKanji(data);
+
+    this.kanji.unshift(data);
   }
 
 }

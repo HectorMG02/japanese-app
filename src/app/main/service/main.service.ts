@@ -214,4 +214,13 @@ export class MainService {
       });
   }
 
+
+  crearKanji(value: any) {
+    this.http.post(`${this.url}/createKanji/`, value)
+      .subscribe((result: any) => {
+        this.kanji = [];
+        result.forEach((r: any) => this.kanji.push(r));
+      });
+  }
+
 }

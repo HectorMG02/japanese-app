@@ -57,4 +57,20 @@ router.post('/deleteKanji', (req, res) => {
 });
 
 
+router.post('/createKanji', (req, res) => {
+    const rawdata = fs.readFileSync('db/kanjis.json');
+    const kanjis = JSON.parse(rawdata);
+
+    let nuevoKanji = req.body;
+    kanjis.unshift(nuevoKanji);
+
+    if (kanjis.length) {
+        fs.writeFileSync('db/kanjis.json', JSON.stringify(kanjis));
+    }
+
+    return res.status(200).json(kanjis);
+});
+
+
+
 module.exports = router;
