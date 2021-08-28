@@ -8,26 +8,28 @@
     <div class="row">
         <div class="col-lg-3 col-xs-12">
             <button *ngIf="adminMode" type="button" class="btn btn-primary my-3" data-toggle="modal"
-                data-target="#exampleModal">
+                data-target="#modalKanji" (click)="accionKanji = 'Crear'">
                 Añadir Kanji
             </button>
         </div>
     </div>
 
 
-    <!-- Modal Kanji Nuevo -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- Modal Kanji Nuevo y Editar -->
+    <div class="modal fade" id="modalKanji" tabindex="-1" role="dialog" aria-labelledby="modalKanjiLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Añadir Kanji</h5>
+                    <h5 class="modal-title" id="modalKanjiLabel">{{ accionKanji }} Kanji</h5>
                     <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form [formGroup]="formularioNuevoKanji">
+                        <input type="text" class="form-control d-none" formControlName="id" />
+
                         <h6>&nbsp;Kanji</h6>
                         <input type="text" class="form-control" placeholder="日本" formControlName="kana" />
 
@@ -40,8 +42,17 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" (click)="crearKanji()" [disabled]="formularioNuevoKanji.invalid"
-                        class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                    <button *ngIf="accionKanji == 'Crear'; else submitEditar" type="button" (click)="crearKanji()"
+                        [disabled]="formularioNuevoKanji.invalid" class="btn btn-primary"
+                        data-dismiss="modal">Guardar</button>
+
+
+                    <ng-template #submitEditar>
+                        <button type="button" (click)="editarKnaji()" [disabled]="formularioNuevoKanji.invalid"
+                            class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                    </ng-template>
+
+
                 </div>
             </div>
         </div>
@@ -52,7 +63,8 @@
         <mat-card>
             <div *ngIf="adminMode" class="row">
                 <div class="col-10">
-                    <button class="btn btn-warning float-end mb-3 btnEdKanji">✏️</button>
+                    <button class="btn btn-warning float-end mb-3 btnEdKanji" (click)="modalModoEditar(item)"
+                        data-toggle="modal" data-target="#modalKanji">✏️</button>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-danger float-end mb-3 btnEdKanji" (click)="deleteKanji(item)">🗑️</button>

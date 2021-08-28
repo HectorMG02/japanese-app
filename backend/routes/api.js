@@ -71,6 +71,26 @@ router.post('/createKanji', (req, res) => {
     return res.status(200).json(kanjis);
 });
 
+router.post('/editKanji', (req, res) => {
+    const rawdata = fs.readFileSync('db/kanjis.json');
+    let kanjis = JSON.parse(rawdata);
 
+    let kanjiEditar = req.body;
+    let parseKanjis = [];
+
+    kanjis.forEach(k => {
+        if (k.id === kanjiEditar.id) {
+            parseKanjis.push(kanjiEditar);
+        } else {
+            parseKanjis.push(k);
+        }
+    });
+
+    if (parseKanjis.length) {
+        fs.writeFileSync('db/kanjis.json', JSON.stringify(parseKanjis));
+    }
+
+    return res.status(200).json(parseKanjis);
+});
 
 module.exports = router;

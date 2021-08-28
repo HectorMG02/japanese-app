@@ -223,4 +223,13 @@ export class MainService {
       });
   }
 
+
+  editarKanji(value: any) {
+    this.http.post(`${this.url}/editKanji/`, value)
+      .subscribe((result: any) => {
+        this.kanji = [];
+        result.forEach((r: any) => this.kanji.push(r));
+      });
+  }
+
 }

@@ -20,13 +20,14 @@ export class KanjiComponent {
   });
 
   formularioNuevoKanji: FormGroup = this.fb.group({
+    id: ['', [Validators.required]],
     kana: ['', [Validators.required]],
     romaji: ['', [Validators.required]],
     significado: ['', [Validators.required]]
   });
 
   adminMode = this.mainService.admin;
-
+  accionKanji: string = 'Crear';
 
   constructor(private fb: FormBuilder,
     public mainService: MainService) { }
@@ -59,6 +60,37 @@ export class KanjiComponent {
     this.mainService.crearKanji(data);
 
     this.kanji.unshift(data);
+  }
+
+
+  editarKnaji() {
+    let data = this.formularioNuevoKanji.value;
+
+    this.mainService.editarKanji(data);
+
+    let parseKanjis: any = [];
+
+    this.kanji.forEach((k: any) => {
+      if (k.id === data.id) {
+        parseKanjis.push(data);
+      } else {
+        parseKanjis.push(k);
+      }
+    });
+
+    this.kanji = parseKanjis;
+
+  }
+
+
+  modalModoEditar(item: any) {
+    this.accionKanji = 'Editar';
+
+    this.formularioNuevoKanji.get('id')?.setValue(item.id);
+    this.formularioNuevoKanji.get('kana')?.setValue(item.kana);
+    this.formularioNuevoKanji.get('romaji')?.setValue(item.romaji);
+    this.formularioNuevoKanji.get('significado')?.setValue(item.significado);
+
   }
 
 }
