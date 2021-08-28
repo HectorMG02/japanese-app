@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 interface Vocabulario {
@@ -66,7 +67,9 @@ interface Datos {
     `
   ]
 })
-export class VocabularioComponent {
+export class VocabularioComponent implements OnInit {
+
+  adminMode: number = this.mainService.admin;
 
   vocabulario: Vocabulario[];
   categorias: string[] = [];
@@ -81,8 +84,14 @@ export class VocabularioComponent {
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
-    private mainService: MainService) {
+    private mainService: MainService,
+    private primengConfig: PrimeNGConfig) {
     this.vocabulario = this.getVocabulario()
+  }
+
+
+  ngOnInit(): void {
+    this.primengConfig.ripple = true; // para hacer que salgan los efectos de primeng
   }
 
   miFormulario: FormGroup = this.fb.group({

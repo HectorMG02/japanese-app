@@ -14,6 +14,7 @@ import { MainService } from '../main/service/main.service';
 export class KanjiComponent {
 
   kanji = this.mainService.kanji;
+  adminMode: number = this.mainService.admin;
 
   miFormulario: FormGroup = this.fb.group({
     buscar: [''],
@@ -26,7 +27,6 @@ export class KanjiComponent {
     significado: ['', [Validators.required]]
   });
 
-  adminMode = this.mainService.admin;
   accionKanji: string = 'Crear';
 
   constructor(private fb: FormBuilder,

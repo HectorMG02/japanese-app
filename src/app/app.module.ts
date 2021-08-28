@@ -16,7 +16,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DialogModule } from 'primeng/dialog';
-
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { MenubarModule } from 'primeng/menubar';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -37,9 +42,16 @@ import { DialogModule } from 'primeng/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ButtonModule,
+    CardModule,
+    MenubarModule,
+    FieldsetModule,
+    ToolbarModule,
+    TableModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

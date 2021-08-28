@@ -13,13 +13,33 @@
         <input type="text" class="form-control" placeholder="Buscar" formControlName="buscar" (input)="filtro()" />
     </form>
 
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <button *ngIf="adminMode" type="button" class="btn btn-primary my-3" data-toggle="modal"
+                data-target="#modalCategoria">
+                Añadir Categoría
+            </button>
+        </div>
+    </div>
+
     <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-xs-12 colVocabulario">
 
         <div class="row">
             <div class="col-12 text-center">
-                <h5 class="my-2"><strong>
-                        <u>{{ dato.categoria }}</u>
-                    </strong></h5>
+                <div class="row">
+                    <div class="col-4 my-2 mx-2 float-left">
+                        <button class="btn btn-secondary mx-3">✏️</button>
+                        <button class="btn btn-dark">🗑️</button>
+                    </div>
+                    <div class="col-3">
+                        <h5 class="my-2"><strong>
+                                <u>{{ dato.categoria }}</u>
+                            </strong></h5>
+                    </div>
+                    <div class="col-4 my-2">
+                        <button class="btn btn-primary float-end">➕</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -29,6 +49,8 @@
                     <tr>
                         <th scope="col">Palabra / Frase</th>
                         <th scope="col">Significado</th>
+                        <th scope="col" *ngIf="adminMode">Editar</th>
+                        <th scope="col" *ngIf="adminMode">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -42,6 +64,14 @@
                                 <input type="text" class="w-70 form-control text-center"
                                     (keyup)="checkRomaji(v.significado, $event)">
                             </ng-template>
+                        </td>
+                        <td *ngIf="adminMode">
+
+                            <button pButton type="button" label="✏️" class="p-button-warning p-button-raised"></button>
+
+                        </td>
+                        <td *ngIf="adminMode">
+                            <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"></button>
                         </td>
                     </tr>
 
