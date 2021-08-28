@@ -17,10 +17,18 @@ interface Kana {
 export class MainService {
 
   constructor(private http: HttpClient,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar) {
+
+    this.http.post<any[]>(`${this.url}/getKanjis`, '')
+      .subscribe(result => {
+        result.forEach(r => this.kanji.push(r));
+      });
+
+  }
 
   login_status: number = 0;
   admin: number = localStorage.getItem('loginAdmin') ? 1 : 0;
+  url: string = 'http://localhost:3030/api';
 
   hiragana: Kana[] = [
     { id: 1, kana: 'あ', romaji: 'a' },
@@ -170,20 +178,9 @@ export class MainService {
     { id: 71, kana: 'ポ', romaji: 'po' },
   ];
 
-  kanji: Kana[] = [
-    { id: 1, kana: '一', romaji: 'ichi', significado: "uno" },
-    { id: 2, kana: '二', romaji: 'ni', significado: "dos" },
-    { id: 3, kana: '三', romaji: 'san', significado: "tres" },
-    { id: 4, kana: '四', romaji: 'shi', significado: "cuatro" },
-    { id: 5, kana: '五', romaji: 'go', significado: "cinco" },
-    { id: 6, kana: '六', romaji: 'roku', significado: "seis" },
-    { id: 7, kana: '七', romaji: 'nana', significado: "siete" },
-    { id: 8, kana: '八', romaji: 'hachi', significado: "ocho" },
-    { id: 9, kana: '九', romaji: 'kyu', significado: "nueve" },
-    { id: 10, kana: '十', romaji: 'ju', significado: "diez" },
-    { id: 11, kana: '百', romaji: 'hyaku', significado: "cien" },
-    { id: 12, kana: '千', romaji: 'sen', significado: "mil" },
-  ];
+  kanji: any = [];
+
+
 
   openSnackBar(message: string) {
     this._snackBar.open(message);
@@ -193,7 +190,6 @@ export class MainService {
   }
 
   login(user: string, password: string) {
-    const url = 'http://localhost:3030/api/loginAdmin';
 
     const data = {
       user: user,
@@ -202,7 +198,7 @@ export class MainService {
 
 
 
-    this.http.post<any[]>(url, data)
+    this.http.post<any[]>(`${this.url}/loginAdmin`, data)
       .subscribe(result => {
         this.login_status = Number(result);
       });

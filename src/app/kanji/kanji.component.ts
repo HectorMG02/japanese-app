@@ -6,12 +6,12 @@ import { MainService } from '../main/service/main.service';
   selector: 'app-kanji',
   templateUrl: './kanji.component.html',
   styles: [
+    `
+     
+    `
   ]
 })
 export class KanjiComponent {
-
-  constructor(private fb: FormBuilder,
-    public mainService: MainService) { }
 
   kanji = this.mainService.kanji;
 
@@ -19,14 +19,32 @@ export class KanjiComponent {
     buscar: [''],
   });
 
+  adminMode = this.mainService.admin;
+
+
+  constructor(private fb: FormBuilder,
+    public mainService: MainService) { }
+
+
+
   filtro() {
     const buscar = this.miFormulario.value.buscar;
-
+    console.log(buscar, this.kanji);
     if (buscar) {
-      this.kanji = this.mainService.kanji.filter(h => h.kana.toLowerCase().includes(buscar) || h.romaji.toLocaleLowerCase().includes(buscar) || h.significado?.toLocaleLowerCase().includes(buscar));
+      //this.kanji = this.mainService.kanji.filter(h => h.kana.toLowerCase().includes(buscar) || h.romaji.toLocaleLowerCase().includes(buscar) || h.significado?.toLocaleLowerCase().includes(buscar));
     } else {
       this.kanji = this.mainService.kanji;
     }
   }
 
+
+  deleteKanji(item: any) {
+    if (confirm(`¿Estás seguro de que quieres eliminar el kanji: ${item.kana}`)) {
+      return
+    }
+
+  }
+
 }
+
+

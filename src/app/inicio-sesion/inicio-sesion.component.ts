@@ -28,7 +28,7 @@ export class InicioSesionComponent {
 
     if (user === 'admin' && password === '123') {
       localStorage.setItem('loginAdmin', '1');
-      return location.href = '/hiragana'
+      return location.href = '/vocabulario'
     } else {
       alert('Usuario o contraseña erróneos');
     }

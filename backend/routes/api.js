@@ -34,5 +34,12 @@ router.post('/loginAdmin', (req, res) => {
 });
 
 
+router.post('/getKanjis', (req, res) => {
+    const rawdata = fs.readFileSync('db/kanjis.json');
+    const kanjis = JSON.parse(rawdata);
+    console.log(kanjis);
+    return res.status(200).json(kanjis);
+});
+
 
 module.exports = router;

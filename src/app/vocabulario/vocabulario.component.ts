@@ -4,8 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
 
 
-
-
 interface Vocabulario {
   kana: string;
   significado: string;
@@ -87,8 +85,6 @@ export class VocabularioComponent {
     this.vocabulario = this.getVocabulario()
   }
 
-
-
   miFormulario: FormGroup = this.fb.group({
     buscar: [''],
   });
@@ -113,7 +109,6 @@ export class VocabularioComponent {
     return this.http.post<Vocabulario[]>(url, '')
       .subscribe(result => {
         const vocabulario_raw = result;
-
 
         vocabulario_raw.forEach(v => {
           if (!this.categorias.includes(v.categoria) && v.categoria) {
