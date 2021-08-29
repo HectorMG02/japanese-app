@@ -233,4 +233,26 @@ router.post('/eliminarGramatica', (req, res) => {
 });
 
 
+router.post('/editarGramatica', (req, res) => {
+    const rawdata = fs.readFileSync('db/gramatica.json');
+    let gramatica = JSON.parse(rawdata);
+
+    const { id, particula, info } = req.body;
+
+    let nuevaGramatica = gramatica.map(g => {
+        if (g.id === id) {
+            g.particula = particula;
+            g.info = info;
+        }
+        return g;
+    });
+
+
+    if (nuevaGramatica.length) {
+        fs.writeFileSync('db/gramatica.json', JSON.stringify(nuevaGramatica));
+    }
+
+    return res.status(200).json(nuevaGramatica);
+});
+
 module.exports = router;

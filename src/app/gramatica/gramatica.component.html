@@ -21,7 +21,7 @@
             </div>
             <div class="col-6">
                 <button *ngIf="adminMode" pButton type="button" class="p-button-warning p-button-raised float-left"
-                    (click)="editarGramatica()" label="✏️">
+                    (click)="editarGramatica(particula)" label="✏️">
                 </button>
             </div>
         </div>
@@ -67,3 +67,24 @@
         </cdk-accordion>
     </div>
 </div>
+
+
+<p-dialog position="top" [header]="textoModalGramatica" [(visible)]="display">
+    <form [formGroup]="formularioGramatica">
+        <label for="">Partícula</label>
+        <input type="text" formControlName="particula" class="form-control">
+
+        <br>
+        <label for="">Info</label>
+        <textarea type="text" formControlName="info" rows="5" class="form-control"></textarea>
+
+        <button pButton *ngIf="textoModalGramatica === 'Editar'; else crearGramatica" type="button"
+            [disabled]="formularioGramatica.invalid" label="Guardar"
+            class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitEditarGramatica()"></button>
+
+        <ng-template #crearGramatica>
+            <button pButton type="button" [disabled]="formularioGramatica.invalid" label="Guardar"
+                class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitCrearGramatica()"></button>
+        </ng-template>
+    </form>
+</p-dialog>

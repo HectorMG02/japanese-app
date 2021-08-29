@@ -280,4 +280,11 @@ export class MainService {
       .subscribe((result: any) => {
       });
   }
+
+
+  editarGramatica(id: number, particula: string, info: string) {
+    this.http.post(`${this.url}/editarGramatica/`, { id: id, particula: particula, info: info })
+      .subscribe((result: any) => {
+      });
+  }
 }

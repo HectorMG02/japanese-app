@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
 
 interface Gramatica {
@@ -69,11 +69,20 @@ export class GramaticaComponent {
   modoQuiz: string = "Estudio";
   url: string = 'http://localhost:3030/api/getGramatica';
 
+  display: boolean = false;
+  textoModalGramatica: string = "";
+
 
   miFormulario: FormGroup = this.fb.group({
     buscar: [''],
   });
 
+
+  formularioGramatica: FormGroup = this.fb.group({
+    id: [''],
+    particula: ['', [Validators.required]],
+    info: ['', [Validators.required]]
+  })
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
@@ -116,15 +125,52 @@ export class GramaticaComponent {
   }
 
 
-  nuevaGramatica() { }
 
-  editarGramatica() { }
 
   eliminarGramatica(id: number) {
     if (confirm("¿Está seguro de que quieres eliminar esto?")) {
       this.mainService.eliminarGramatica(id);
       this.gramatica = this.gramatica.filter(g => g.id !== id);
+      this.mainService.openSnackBar('Gramática eliminada con éxito (^^)');
     }
   }
+
+
+  editarGramatica(g: Gramatica) {
+
+    const { id, particula, info } = g;
+
+    this.formularioGramatica.setValue({
+      id,
+      particula,
+      info
+    });
+
+    this.textoModalGramatica = 'Editar';
+    this.display = true;
+  }
+
+  submitEditarGramatica() {
+
+    const { id, particula, info } = this.formularioGramatica.value;
+
+    this.mainService.editarGramatica(id, particula, info);
+
+    this.gramatica = this.gramatica.map(g => {
+      if (g.id === id) {
+        g.particula = particula;
+        g.info = info;
+      }
+      return g;
+    });
+
+
+    this.mainService.openSnackBar('Gramática editada con éxito (^^)');
+    this.display = false;
+  }
+
+  nuevaGramatica() { }
+
+  submitCrearGramatica() { }
 
 }
