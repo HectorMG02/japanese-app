@@ -10,7 +10,8 @@
     </div>
 
     <div class="col-lg-4">
-        <button *ngIf="adminMode" pButton type="button" class="p-button-success p-button-raised float-end">
+        <button *ngIf="adminMode" pButton type="button" class="p-button-success p-button-raised float-end"
+            (click)="nuevaCategoria()">
             Añadir Categoría
         </button>
     </div>
@@ -69,22 +70,32 @@
                     <tr *ngFor="let v of dato.datos">
                         <th scope="row">{{ v.kana }}</th>
                         <td>
-                            <input *ngIf="modoQuiz=='Estudio';else modoExamen" disabled type="text"
+                            <input *ngIf="modoQuiz=='Estudio' && v.significado;else modoExamen" disabled type="text"
                                 class="w-70 form-control text-center" value="{{ v.significado }}">
 
                             <ng-template #modoExamen>
-                                <input type="text" class="w-70 form-control text-center"
+                                <input *ngIf="v.significado" type="text" class="w-70 form-control text-center"
                                     (keyup)="checkRomaji(v.significado, $event)">
                             </ng-template>
                         </td>
-                        <td *ngIf="adminMode">
+                        <td *ngIf="adminMode && v.significado; else tdVacio1">
                             <button pButton type="button" label="✏️" (click)="editarVocab(v)"
                                 class="p-button-warning p-button-raised"></button>
                         </td>
-                        <td *ngIf="adminMode">
+                        <ng-template #tdVacio1>
+                            <td></td>
+                        </ng-template>
+
+                        <td *ngIf="adminMode && v.significado; else tdVacio2">
                             <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"
                                 (click)="eliminarVocab( v.id, v.kana )"></button>
                         </td>
+
+
+                        <ng-template #tdVacio2>
+                            <td></td>
+                        </ng-template>
+
                     </tr>
 
                 </tbody>
@@ -95,12 +106,18 @@
 
 
 
-<p-dialog position="top" header="Editar Categoria" [(visible)]="display">
+<p-dialog position="top" [header]="textoModalCat" [(visible)]="display">
     <form [formGroup]="formularioCategoria">
         <label for="">Nombre</label>
         <input type="text" formControlName="nombre" class="form-control">
-        <button pButton type="button" [disabled]="formularioCategoria.invalid" label="Guardar"
+        <button pButton *ngIf="textoModalCat.split(' ')[0] === 'Editar'; else crearCategoria" type="button"
+            [disabled]="formularioCategoria.invalid" label="Guardar"
             class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitEditarCategoria()"></button>
+
+        <ng-template #crearCategoria>
+            <button pButton type="button" [disabled]="formularioCategoria.invalid" label="Guardar"
+                class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitCrearCategoria()"></button>
+        </ng-template>
     </form>
 </p-dialog>
 
@@ -116,11 +133,13 @@
         <input type="text" formControlName="significado" placeholder="gracias" class="form-control">
 
         <br>
-        <label>Categoría</label>
-        <select class="form-control" formControlName="categoria">
-            <option value="-1" hidden>-- Selecciona una categoría --</option>
-            <option *ngFor="let dato of datos" [value]="dato.categoria">{{dato.categoria}}</option>
-        </select>
+        <span *ngIf="textoModalVoc.split(' ')[0] == 'Editar';">
+            <label>Categoría</label>
+            <select class="form-control" formControlName="categoria">
+                <option value="-1" hidden>-- Selecciona una categoría --</option>
+                <option *ngFor="let dato of datos" [value]="dato.categoria">{{dato.categoria}}</option>
+            </select>
+        </span>
 
         <button *ngIf="textoModalVoc.split(' ')[0] == 'Añadir'; else btnEditar" pButton type="button"
             [disabled]="formNuevoVoc.invalid" label="Guardar" class="p-button-primary mt-2 float-end p-button-outlined"

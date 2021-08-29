@@ -195,4 +195,23 @@ router.post('/editarVocabulario', (req, res) => {
     return res.status(200).json(nuevoVocabulario);
 });
 
+
+router.post('/nuevaCategoriaVocabulario', (req, res) => {
+    const rawdata = fs.readFileSync('db/vocabulario.json');
+    let vocabulario = JSON.parse(rawdata);
+
+    const { nombre } = req.body;
+
+    vocabulario.unshift({
+        id: vocabulario.length + 1,
+        categoria: nombre,
+    });
+
+    if (vocabulario.length) {
+        fs.writeFileSync('db/vocabulario.json', JSON.stringify(vocabulario));
+    }
+
+    return res.status(200).json(vocabulario);
+});
+
 module.exports = router;

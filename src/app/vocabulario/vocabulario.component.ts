@@ -89,7 +89,8 @@ export class VocabularioComponent implements OnInit {
   categoriaEd: string = "";
 
   textoModalVoc: string = "";
-
+  textoModalCat: string = "";
+  categoriaSeleccionada: string = "";
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
@@ -130,7 +131,7 @@ export class VocabularioComponent implements OnInit {
     } else if (tipo == 'Examen') {
       this.modoQuiz = 'Examen';
 
-      this.datos = this.datos.filter(d => d.datos.sort((a, b) => 0.5 - Math.random()).slice(0, 10));
+      this.datos = this.datos.filter(d => d.datos?.sort((a, b) => 0.5 - Math.random()).slice(0, 10));
     }
   }
 
@@ -162,6 +163,12 @@ export class VocabularioComponent implements OnInit {
         this.datos.forEach(d => {
           this.totalDatos += d.datos.length;
         });
+
+        // delete duplicated elements from this.datos.datos array
+        this.datos.forEach(d => {
+          d.datos = d.datos.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+        });
+
 
         this.copiaDatos = this.datos;
 
@@ -215,6 +222,7 @@ export class VocabularioComponent implements OnInit {
   }
 
   editarCategoria(categoria: string) {
+    this.textoModalCat = 'Editar Categoría';
     this.categoriaEd = categoria;
     this.formularioCategoria.get('nombre')?.setValue(categoria);
     this.display = true;
@@ -242,6 +250,7 @@ export class VocabularioComponent implements OnInit {
     this.formNuevoVoc.reset();
     this.textoModalVoc = "Añadir Vocabulario"
     this.displayNuevoVoc = true;
+    this.formNuevoVoc.get('categoria')?.setValue(categoria);
   }
 
   submitNuevoVoc() {
@@ -304,30 +313,41 @@ export class VocabularioComponent implements OnInit {
 
     this.mainService.editarVocab(id, kana, significado, categoria);
 
-    let cambioCategoria = false;
-
-    this.datos = this.datos.map((d: Datos) => {
+    this.datos.forEach((d: Datos) => {
       d.datos = d.datos.map((v: Vocabulario) => {
-        if (v.id === id) {
-          if (v.categoria != categoria) {
-            cambioCategoria = true;
-          }
-
-          v.kana = kana;
-          v.significado = significado;
+        if (v.id === id && v.categoria != categoria) {
+          location.reload();
         }
         return v;
       });
-      return d;
     });
 
-
-    if (cambioCategoria) {
-      this.getVocabulario();
-    }
-
-    this.copiaDatos = this.datos;
+    //location.reload();
     this.mainService.openSnackBar('Vocabulario editado con éxito (^^)');
     this.displayNuevoVoc = false;
+  }
+
+
+  nuevaCategoria() {
+    this.formularioCategoria.reset();
+    this.display = true;
+    this.textoModalCat = "Añadir Categoría";
+  }
+
+
+  submitCrearCategoria() {
+    const nombreCategoria = this.formularioCategoria.get('nombre')?.value;
+
+    this.mainService.nuevaCategoria(nombreCategoria);
+
+    this.datos.unshift({
+      id: this.datos.length + 1,
+      categoria: nombreCategoria,
+      datos: []
+    });
+
+    this.copiaDatos = this.datos;
+    this.mainService.openSnackBar('Categoría creada con éxito (^^)');
+    this.display = false;
   }
 }

@@ -266,4 +266,11 @@ export class MainService {
       .subscribe((result: any) => {
       });
   }
+
+
+  nuevaCategoria(nombre: string) {
+    this.http.post(`${this.url}/nuevaCategoriaVocabulario/`, { nombre: nombre })
+      .subscribe((result: any) => {
+      });
+  }
 }
