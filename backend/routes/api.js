@@ -132,4 +132,26 @@ router.post('/editarCategoriaVocabulario', (req, res) => {
     return res.status(200).json(nuevoVocabulario);
 });
 
+
+router.post('/nuevoVocabulario', (req, res) => {
+    const rawdata = fs.readFileSync('db/vocabulario.json');
+    let vocabulario = JSON.parse(rawdata);
+
+    const { kana, significado, categoria } = req.body;
+
+    vocabulario.unshift({
+        id: vocabulario.length + 1,
+        kana: kana,
+        significado: significado,
+        categoria: categoria
+    });
+
+    if (vocabulario.length) {
+        fs.writeFileSync('db/vocabulario.json', JSON.stringify(vocabulario));
+    }
+
+    return res.status(200).json(vocabulario);
+});
+
+
 module.exports = router;

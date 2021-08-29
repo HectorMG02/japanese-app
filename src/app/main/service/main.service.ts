@@ -9,6 +9,12 @@ interface Kana {
   significado?: string;
 }
 
+interface Vocabulario {
+  kana: string;
+  significado: string;
+  categoria: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -238,6 +244,13 @@ export class MainService {
 
   editCategoria(oldName: string, newName: string): void {
     this.http.post(`${this.url}/editarCategoriaVocabulario/`, { oldName: oldName, newName: newName })
+      .subscribe((result: any) => {
+      });
+  }
+
+
+  nuevoVocab(vocab: Vocabulario): void {
+    this.http.post(`${this.url}/nuevoVocabulario/`, vocab)
       .subscribe((result: any) => {
       });
   }

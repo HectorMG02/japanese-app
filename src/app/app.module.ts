@@ -22,6 +22,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ToolbarModule } from 'primeng/toolbar';
 import { TableModule } from 'primeng/table';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { TableModule } from 'primeng/table';
     MenubarModule,
     FieldsetModule,
     ToolbarModule,
-    TableModule
+    TableModule,
+    MultiSelectModule
   ],
   providers: [
   ],

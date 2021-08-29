@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 interface Vocabulario {
+  id: number;
   kana: string;
   significado: string;
   categoria: string;
@@ -84,8 +85,8 @@ export class VocabularioComponent implements OnInit {
   totalDatos: number = 0;
 
   display: boolean = false;
+  displayNuevoVoc: boolean = false;
   categoriaEd: string = "";
-
 
 
 
@@ -110,6 +111,12 @@ export class VocabularioComponent implements OnInit {
   formularioCategoria: FormGroup = this.fb.group({
     nombre: ['', [Validators.required]]
   });
+
+  formNuevoVoc: FormGroup = this.fb.group({
+    kana: ['', [Validators.required]],
+    significado: ['', [Validators.required]],
+    categoria: ['-1', [Validators.required, Validators.min(0)]],
+  })
 
   changeMode(tipo: string): void {
     if (tipo == 'Estudio') {
@@ -224,8 +231,41 @@ export class VocabularioComponent implements OnInit {
 
     this.copiaDatos = this.datos;
     this.mainService.openSnackBar('Categoría modificada con éxito (^^)');
-    // TODO: esto va al final de la función junto con el popup de categoría modificada
     this.display = false;
+  }
+
+  nuevoVocab(categoria: string) {
+    this.displayNuevoVoc = true;
+  }
+
+  submitNuevoVoc() {
+
+    const { kana, significado, categoria } = this.formNuevoVoc.value;
+
+    this.mainService.nuevoVocab({ kana: kana, significado: significado, categoria: categoria });
+    let totalDatos = 0;
+
+    this.datos.forEach((d: Datos) => {
+      totalDatos += d.datos.length;
+    });
+
+
+    this.datos.map((d: Datos) => {
+      if (d.categoria === categoria) {
+        d.datos.unshift({
+          id: totalDatos + 1,
+          kana: kana,
+          significado: significado,
+          categoria: categoria
+        });
+      }
+      return d;
+    });
+
+    this.copiaDatos = this.datos;
+
+    this.mainService.openSnackBar('Vocabulario añadido con éxito (^^)');
+    this.displayNuevoVoc = false;
   }
 
 }
