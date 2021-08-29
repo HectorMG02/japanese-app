@@ -15,15 +15,14 @@
 
     <div class="row">
         <div class="col-lg-3 col-xs-12">
-            <button *ngIf="adminMode" type="button" class="btn btn-primary my-3" data-toggle="modal"
-                data-target="#modalCategoria">
+            <button *ngIf="adminMode" pButton type="button" class="p-button-success my-3 p-button-raised"
+                data-toggle="modal" data-target="#modalCategoria">
                 Añadir Categoría
             </button>
         </div>
     </div>
 
     <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-md-5 col-xs-12 colVocabulario">
-
         <div class="row">
             <div class="col-12 text-center">
                 <div class="row">
@@ -92,10 +91,14 @@
 </div>
 
 
+
 <p-dialog position="top" header="Editar Categoria" [(visible)]="display">
-    <label for="">Nombre</label>
-    <input type="text" [value]="categoriaEd" class="form-control">
-    <button pButton type="button" label="Guardar" class="p-button-primary mt-2 float-end p-button-outlined"></button>
+    <form [formGroup]="formularioCategoria">
+        <label for="">Nombre</label>
+        <input type="text" formControlName="nombre" class="form-control">
+        <button pButton type="button" [disabled]="formularioCategoria.invalid" label="Guardar"
+            class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitEditarCategoria()"></button>
+    </form>
 </p-dialog>
 
 <mat-form-field style="display: none">

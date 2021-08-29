@@ -10,7 +10,6 @@ interface Kana {
 }
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -186,17 +185,14 @@ export class MainService {
     this._snackBar.open(message);
     setTimeout(() => {
       this._snackBar.dismiss();
-    }, 1500);
+    }, 2000);
   }
 
   login(user: string, password: string) {
-
     const data = {
       user: user,
       password: password,
     };
-
-
 
     this.http.post<any[]>(`${this.url}/loginAdmin`, data)
       .subscribe(result => {
@@ -206,7 +202,7 @@ export class MainService {
     return this.login_status;
   }
 
-  deleteKanji(item: Kana) {
+  deleteKanji(item: Kana): void {
     this.http.post(`${this.url}/deleteKanji/`, item)
       .subscribe((result: any) => {
         this.kanji = [];
@@ -215,7 +211,7 @@ export class MainService {
   }
 
 
-  crearKanji(value: any) {
+  crearKanji(value: any): void {
     this.http.post(`${this.url}/createKanji/`, value)
       .subscribe((result: any) => {
         this.kanji = [];
@@ -224,7 +220,7 @@ export class MainService {
   }
 
 
-  editarKanji(value: any) {
+  editarKanji(value: any): void {
     this.http.post(`${this.url}/editKanji/`, value)
       .subscribe((result: any) => {
         this.kanji = [];
@@ -233,8 +229,15 @@ export class MainService {
   }
 
 
-  eliminarCategoria(categoria: string) {
+  eliminarCategoria(categoria: string): void {
     this.http.post(`${this.url}/eliminarCategoriaVocabulario/`, { categoria: categoria })
+      .subscribe((result: any) => {
+      });
+  }
+
+
+  editCategoria(oldName: string, newName: string): void {
+    this.http.post(`${this.url}/editarCategoriaVocabulario/`, { oldName: oldName, newName: newName })
       .subscribe((result: any) => {
       });
   }

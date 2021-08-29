@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 interface Vocabulario {
@@ -91,7 +92,8 @@ export class VocabularioComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private http: HttpClient,
     private mainService: MainService,
-    private primengConfig: PrimeNGConfig) {
+    private primengConfig: PrimeNGConfig,
+    private _snackBar: MatSnackBar) {
     this.vocabulario = this.getVocabulario()
   }
 
@@ -102,6 +104,11 @@ export class VocabularioComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     buscar: [''],
+  });
+
+
+  formularioCategoria: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required]]
   });
 
   changeMode(tipo: string): void {
@@ -187,13 +194,38 @@ export class VocabularioComponent implements OnInit {
 
 
   eliminarCategoria(categoria: string) {
-    this.mainService.eliminarCategoria(categoria);
-    this.datos = this.datos.filter((d: Datos) => d.categoria !== categoria);
-    this.copiaDatos = this.datos;
+    if (confirm(`¿Estás seguro de que quieres eliminar esta categoría? perderás todo el vocabulario asociado a la categoría: ${categoria}`)) {
+      this.mainService.eliminarCategoria(categoria);
+      this.datos = this.datos.filter((d: Datos) => d.categoria !== categoria);
+      this.copiaDatos = this.datos;
+
+      this.mainService.openSnackBar('Categoría eliminada con éxito (^^)');
+    }
   }
 
   editarCategoria(categoria: string) {
     this.categoriaEd = categoria;
+    this.formularioCategoria.get('nombre')?.setValue(categoria);
     this.display = true;
   }
+
+  submitEditarCategoria() {
+    const nombreCategoriaOld = this.categoriaEd;
+    const newName = this.formularioCategoria.get('nombre')?.value;
+
+    this.mainService.editCategoria(nombreCategoriaOld, newName);
+
+    this.datos = this.datos.map(v => {
+      if (v.categoria === nombreCategoriaOld) {
+        v.categoria = newName;
+      }
+      return v;
+    });
+
+    this.copiaDatos = this.datos;
+    this.mainService.openSnackBar('Categoría modificada con éxito (^^)');
+    // TODO: esto va al final de la función junto con el popup de categoría modificada
+    this.display = false;
+  }
+
 }

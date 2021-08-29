@@ -111,4 +111,25 @@ router.post('/eliminarCategoriaVocabulario', (req, res) => {
 });
 
 
+router.post('/editarCategoriaVocabulario', (req, res) => {
+    const rawdata = fs.readFileSync('db/vocabulario.json');
+    let vocabulario = JSON.parse(rawdata);
+
+    const oldName = req.body.oldName;
+    const newName = req.body.newName;
+
+    let nuevoVocabulario = vocabulario.map(v => {
+        if (v.categoria === oldName) {
+            v.categoria = newName;
+        }
+        return v;
+    });
+
+    if (nuevoVocabulario.length) {
+        fs.writeFileSync('db/vocabulario.json', JSON.stringify(nuevoVocabulario));
+    }
+
+    return res.status(200).json(nuevoVocabulario);
+});
+
 module.exports = router;
