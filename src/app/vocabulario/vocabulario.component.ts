@@ -268,4 +268,19 @@ export class VocabularioComponent implements OnInit {
     this.displayNuevoVoc = false;
   }
 
+
+  eliminarVocab(id: number, kana: string) {
+    if (confirm(`¿Estás seguro de que quieres eliminar este vocabulario: ${kana}?`)) {
+      this.mainService.eliminarVocab(id);
+
+      this.datos = this.datos.map((d: Datos) => {
+        d.datos = d.datos.filter((v: Vocabulario) => v.id !== id);
+        return d;
+      });
+
+      this.copiaDatos = this.datos;
+      this.mainService.openSnackBar('Vocabulario eliminado con éxito (^^)');
+    }
+  }
+
 }

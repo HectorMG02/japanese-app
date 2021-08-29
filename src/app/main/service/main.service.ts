@@ -255,4 +255,9 @@ export class MainService {
       });
   }
 
+  eliminarVocab(id: number): void {
+    this.http.post(`${this.url}/eliminarVocabulario/`, { id: id })
+      .subscribe((result: any) => {
+      });
+  }
 }

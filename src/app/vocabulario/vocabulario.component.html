@@ -81,7 +81,8 @@
                             <button pButton type="button" label="✏️" class="p-button-warning p-button-raised"></button>
                         </td>
                         <td *ngIf="adminMode">
-                            <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"></button>
+                            <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"
+                                (click)="eliminarVocab( v.id, v.kana )"></button>
                         </td>
                     </tr>
 
