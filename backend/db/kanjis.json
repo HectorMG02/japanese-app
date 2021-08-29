@@ -1,1 +1,44 @@
-[{"id":4,"kana":"四","romaji":"shi","significado":"cuatro"},{"id":5,"kana":"五","romaji":"go","significado":"cinco"},{"id":6,"kana":"六","romaji":"roku","significado":"seis"},{"id":7,"kana":"七","romaji":"nana","significado":"siete"},{"id":8,"kana":"八","romaji":"hachi","significado":"ocho"},{"id":9,"kana":"九","romaji":"kyu","significado":"nueve"},{"id":10,"kana":"十","romaji":"ju","significado":"diez"}]
+[
+    {
+        "id": 4,
+        "kana": "四",
+        "romaji": "shi",
+        "significado": "cuatro"
+    },
+    {
+        "id": 5,
+        "kana": "五",
+        "romaji": "go",
+        "significado": "cinco"
+    },
+    {
+        "id": 6,
+        "kana": "六",
+        "romaji": "roku",
+        "significado": "seis"
+    },
+    {
+        "id": 7,
+        "kana": "七",
+        "romaji": "nana",
+        "significado": "siete"
+    },
+    {
+        "id": 8,
+        "kana": "八",
+        "romaji": "hachi",
+        "significado": "ocho"
+    },
+    {
+        "id": 9,
+        "kana": "九",
+        "romaji": "kyu",
+        "significado": "nueve"
+    },
+    {
+        "id": 10,
+        "kana": "十",
+        "romaji": "ju",
+        "significado": "diez"
+    }
+]

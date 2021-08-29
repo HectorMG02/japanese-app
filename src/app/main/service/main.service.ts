@@ -232,4 +232,11 @@ export class MainService {
       });
   }
 
+
+  eliminarCategoria(categoria: string) {
+    this.http.post(`${this.url}/eliminarCategoriaVocabulario/`, { categoria: categoria })
+      .subscribe((result: any) => {
+      });
+  }
+
 }

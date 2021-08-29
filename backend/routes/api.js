@@ -93,4 +93,22 @@ router.post('/editKanji', (req, res) => {
     return res.status(200).json(parseKanjis);
 });
 
+
+router.post('/eliminarCategoriaVocabulario', (req, res) => {
+    const rawdata = fs.readFileSync('db/vocabulario.json');
+    let vocabulario = JSON.parse(rawdata);
+
+    let categoriaEliminar = req.body.categoria;
+
+    let nuevoVocabulario = vocabulario.filter(v => v.categoria !== categoriaEliminar);
+
+
+    if (nuevoVocabulario.length) {
+        fs.writeFileSync('db/vocabulario.json', JSON.stringify(nuevoVocabulario));
+    }
+
+    return res.status(200).json(nuevoVocabulario);
+});
+
+
 module.exports = router;

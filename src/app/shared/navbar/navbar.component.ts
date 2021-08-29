@@ -24,6 +24,10 @@ interface MenuItems {
       position: absolute;
       left: 0;
     }
+
+    .adminMovil{
+      margin-right: -1px!important;
+    }
     `
   ]
 })

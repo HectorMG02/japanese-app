@@ -23,7 +23,6 @@
                     <ng-template #modoAdmin>
                         <span (click)="logout()">Cerrar Sesión</span>
                     </ng-template>
-
                 </h5>
             </ng-template>
 
@@ -40,11 +39,17 @@
         <mat-menu #beforeMenu="matMenu" xPosition="before">
             <button *ngFor="let item of menuItems;" mat-menu-item [routerLink]="[ item.ruta ]"
                 routerLinkActive="active">
-
                 <span *ngIf="item.nombre != 'Administración'; else administracionMovil">{{ item.nombre }}</span>
 
                 <ng-template #administracionMovil>
-                    <mat-icon class="admin_movil">account_circle</mat-icon>{{ item.nombre }}
+                    <span>
+                        <mat-icon class="adminMovil">account_circle</mat-icon>&nbsp;&nbsp;<span
+                            *ngIf="!admin; else modoAdmin">{{ item.nombre
+                            }}</span>
+                        <ng-template #modoAdmin>
+                            <span (click)="logout()">Cerrar Sesión</span>
+                        </ng-template>
+                    </span>
                 </ng-template>
 
 

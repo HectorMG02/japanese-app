@@ -12,6 +12,7 @@ interface Vocabulario {
 }
 
 interface Datos {
+  id: number;
   categoria: string;
   datos: Vocabulario[];
 }
@@ -179,4 +180,11 @@ export class VocabularioComponent implements OnInit {
 
   }
 
+
+  eliminarCategoria(categoria: string) {
+    this.mainService.eliminarCategoria(categoria);
+    console.log(categoria);
+    this.datos = this.datos.filter((d: Datos) => d.categoria !== categoria);
+    this.copiaDatos = this.datos;
+  }
 }
