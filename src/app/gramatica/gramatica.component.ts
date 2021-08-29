@@ -8,7 +8,7 @@ import { MainService } from '../main/service/main.service';
 interface Gramatica {
   id: number;
   particula: string;
-  pronunciacion: string;
+  pronunciacion?: string;
   info: string;
 }
 
@@ -81,7 +81,8 @@ export class GramaticaComponent {
   formularioGramatica: FormGroup = this.fb.group({
     id: [''],
     particula: ['', [Validators.required]],
-    info: ['', [Validators.required]]
+    info: ['', [Validators.required]],
+    pronunciacion: ['']
   })
 
   constructor(private fb: FormBuilder,
@@ -111,7 +112,7 @@ export class GramaticaComponent {
 
       this.http.post<Gramatica[]>(this.url, '')
         .subscribe((result: Gramatica[]) => {
-          this.gramatica = result.filter(g => g.particula.toLowerCase().includes(buscar.toLowerCase()) || g.info.toLowerCase().includes(buscar.toLowerCase()) || g.pronunciacion.toLowerCase().includes(buscar.toLowerCase()));
+          this.gramatica = result.filter(g => g.particula.toLowerCase().includes(buscar.toLowerCase()) || g.info.toLowerCase().includes(buscar.toLowerCase()) || g.pronunciacion?.toLowerCase().includes(buscar.toLowerCase()));
         });
 
 
@@ -137,13 +138,13 @@ export class GramaticaComponent {
 
 
   editarGramatica(g: Gramatica) {
-
-    const { id, particula, info } = g;
+    const { id, particula, info, pronunciacion } = g;
 
     this.formularioGramatica.setValue({
       id,
       particula,
-      info
+      info,
+      pronunciacion
     });
 
     this.textoModalGramatica = 'Editar';
@@ -151,15 +152,15 @@ export class GramaticaComponent {
   }
 
   submitEditarGramatica() {
+    const { id, particula, info, pronunciacion } = this.formularioGramatica.value;
 
-    const { id, particula, info } = this.formularioGramatica.value;
-
-    this.mainService.editarGramatica(id, particula, info);
+    this.mainService.editarGramatica(id, particula, info, pronunciacion);
 
     this.gramatica = this.gramatica.map(g => {
       if (g.id === id) {
         g.particula = particula;
         g.info = info;
+        g.pronunciacion = pronunciacion;
       }
       return g;
     });
@@ -169,8 +170,28 @@ export class GramaticaComponent {
     this.display = false;
   }
 
-  nuevaGramatica() { }
+  nuevaGramatica() {
+    this.formularioGramatica.reset();
+    this.textoModalGramatica = 'Añadir';
+    this.display = true;
+  }
 
-  submitCrearGramatica() { }
+  submitCrearGramatica() {
+
+    const { particula, info, pronunciacion } = this.formularioGramatica.value;
+
+    this.mainService.crearGramatica(particula, info, pronunciacion);
+
+    this.gramatica.unshift({
+      id: this.gramatica.length + 1,
+      particula,
+      pronunciacion,
+      info
+    });
+
+    this.mainService.openSnackBar('Gramática añadida con éxito (^^)');
+    this.display = false;
+
+  }
 
 }

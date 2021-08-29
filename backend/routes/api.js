@@ -237,22 +237,45 @@ router.post('/editarGramatica', (req, res) => {
     const rawdata = fs.readFileSync('db/gramatica.json');
     let gramatica = JSON.parse(rawdata);
 
-    const { id, particula, info } = req.body;
+    const { id, particula, info, pronunciacion } = req.body;
 
-    let nuevaGramatica = gramatica.map(g => {
+    gramatica.map(g => {
         if (g.id === id) {
             g.particula = particula;
             g.info = info;
+            g.pronunciacion = pronunciacion;
         }
         return g;
     });
 
-
-    if (nuevaGramatica.length) {
-        fs.writeFileSync('db/gramatica.json', JSON.stringify(nuevaGramatica));
+    if (gramatica.length) {
+        fs.writeFileSync('db/gramatica.json', JSON.stringify(gramatica));
     }
 
-    return res.status(200).json(nuevaGramatica);
+    return res.status(200).json(gramatica);
+});
+
+
+
+router.post('/crearGramatica', (req, res) => {
+    const rawdata = fs.readFileSync('db/gramatica.json');
+    let gramatica = JSON.parse(rawdata);
+
+    const { particula, info, pronunciacion } = req.body;
+
+    gramatica.unshift({
+        id: gramatica.length + 1,
+        particula: particula,
+        info: info,
+        pronunciacion: pronunciacion
+    });
+
+
+    if (gramatica.length) {
+        fs.writeFileSync('db/gramatica.json', JSON.stringify(gramatica));
+    }
+
+    return res.status(200).json(gramatica);
 });
 
 module.exports = router;

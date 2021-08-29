@@ -75,8 +75,14 @@
         <input type="text" formControlName="particula" class="form-control">
 
         <br>
+        <label for="">Pronunciación</label>
+        <input type="text" formControlName="pronunciacion" class="form-control">
+
+        <br>
         <label for="">Info</label>
         <textarea type="text" formControlName="info" rows="5" class="form-control"></textarea>
+
+
 
         <button pButton *ngIf="textoModalGramatica === 'Editar'; else crearGramatica" type="button"
             [disabled]="formularioGramatica.invalid" label="Guardar"

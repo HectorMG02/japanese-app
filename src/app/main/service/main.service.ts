@@ -282,8 +282,14 @@ export class MainService {
   }
 
 
-  editarGramatica(id: number, particula: string, info: string) {
-    this.http.post(`${this.url}/editarGramatica/`, { id: id, particula: particula, info: info })
+  editarGramatica(id: number, particula: string, info: string, pronunciacion: string) {
+    this.http.post(`${this.url}/editarGramatica/`, { id: id, particula: particula, info: info, pronunciacion: pronunciacion })
+      .subscribe((result: any) => {
+      });
+  }
+
+  crearGramatica(particula: string, info: string, pronunciacion: string) {
+    this.http.post(`${this.url}/crearGramatica/`, { particula: particula, info: info, pronunciacion: pronunciacion })
       .subscribe((result: any) => {
       });
   }
