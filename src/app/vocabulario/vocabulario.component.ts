@@ -82,6 +82,11 @@ export class VocabularioComponent implements OnInit {
   acertados: string[] = [];
   totalDatos: number = 0;
 
+  display: boolean = false;
+  categoriaEd: string = "";
+
+
+
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
@@ -183,8 +188,12 @@ export class VocabularioComponent implements OnInit {
 
   eliminarCategoria(categoria: string) {
     this.mainService.eliminarCategoria(categoria);
-    console.log(categoria);
     this.datos = this.datos.filter((d: Datos) => d.categoria !== categoria);
     this.copiaDatos = this.datos;
+  }
+
+  editarCategoria(categoria: string) {
+    this.categoriaEd = categoria;
+    this.display = true;
   }
 }

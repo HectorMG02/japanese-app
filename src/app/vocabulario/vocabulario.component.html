@@ -22,14 +22,19 @@
         </div>
     </div>
 
-    <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-xs-12 colVocabulario">
+    <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-md-5 col-xs-12 colVocabulario">
 
         <div class="row">
             <div class="col-12 text-center">
                 <div class="row">
                     <div class="col-4 my-2 mx-2 float-left">
-                        <button *ngIf="adminMode" pButton type="button" label="✏️"
-                            class="p-button-warning mx-3 my-2 p-button-raised"></button>
+
+
+                        <button *ngIf="adminMode" pButton type="button"
+                            class="p-button-warning mx-3 my-2 p-button-raised" (click)="editarCategoria(dato.categoria)"
+                            label="✏️"></button>
+
+
                         <button *ngIf="adminMode" (click)="eliminarCategoria(dato.categoria)" pButton type="button"
                             label="🗑️" class="p-button-danger my-2 p-button-raised"></button>
                     </div>
@@ -86,6 +91,12 @@
     </div>
 </div>
 
+
+<p-dialog position="top" header="Editar Categoria" [(visible)]="display">
+    <label for="">Nombre</label>
+    <input type="text" [value]="categoriaEd" class="form-control">
+    <button pButton type="button" label="Guardar" class="p-button-primary mt-2 float-end p-button-outlined"></button>
+</p-dialog>
 
 <mat-form-field style="display: none">
     <mat-label>Message</mat-label>
