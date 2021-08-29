@@ -260,4 +260,10 @@ export class MainService {
       .subscribe((result: any) => {
       });
   }
+
+  editarVocab(id: number, kana: string, significado: string, categoria: string) {
+    this.http.post(`${this.url}/editarVocabulario/`, { id: id, kana: kana, significado: significado, categoria: categoria })
+      .subscribe((result: any) => {
+      });
+  }
 }

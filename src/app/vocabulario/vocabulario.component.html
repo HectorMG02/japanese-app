@@ -78,7 +78,8 @@
                             </ng-template>
                         </td>
                         <td *ngIf="adminMode">
-                            <button pButton type="button" label="✏️" class="p-button-warning p-button-raised"></button>
+                            <button pButton type="button" label="✏️" (click)="editarVocab(v)"
+                                class="p-button-warning p-button-raised"></button>
                         </td>
                         <td *ngIf="adminMode">
                             <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"
@@ -104,7 +105,7 @@
 </p-dialog>
 
 
-<p-dialog position="top" header="Añadir vocabulario" [(visible)]="displayNuevoVoc">
+<p-dialog position="top" [header]="textoModalVoc" [(visible)]="displayNuevoVoc">
     <form [formGroup]="formNuevoVoc">
 
         <label>Palabra en japonés</label>
@@ -121,8 +122,15 @@
             <option *ngFor="let dato of datos" [value]="dato.categoria">{{dato.categoria}}</option>
         </select>
 
-        <button pButton type="button" [disabled]="formNuevoVoc.invalid" label="Guardar"
-            class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitNuevoVoc()"></button>
+        <button *ngIf="textoModalVoc.split(' ')[0] == 'Añadir'; else btnEditar" pButton type="button"
+            [disabled]="formNuevoVoc.invalid" label="Guardar" class="p-button-primary mt-2 float-end p-button-outlined"
+            (click)="submitNuevoVoc()"></button>
+
+        <ng-template #btnEditar>
+            <button pButton type="button" [disabled]="formNuevoVoc.invalid" label="Guardar"
+                class="p-button-primary mt-2 float-end p-button-outlined" (click)="submitEdVoc()"></button>
+        </ng-template>
+
     </form>
 </p-dialog>
 

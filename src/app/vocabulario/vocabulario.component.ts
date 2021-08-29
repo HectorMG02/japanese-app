@@ -88,6 +88,7 @@ export class VocabularioComponent implements OnInit {
   displayNuevoVoc: boolean = false;
   categoriaEd: string = "";
 
+  textoModalVoc: string = "";
 
 
   constructor(private fb: FormBuilder,
@@ -113,6 +114,7 @@ export class VocabularioComponent implements OnInit {
   });
 
   formNuevoVoc: FormGroup = this.fb.group({
+    id: [],
     kana: ['', [Validators.required]],
     significado: ['', [Validators.required]],
     categoria: ['-1', [Validators.required, Validators.min(0)]],
@@ -133,6 +135,8 @@ export class VocabularioComponent implements OnInit {
   }
 
   getVocabulario(): any {
+    this.datos = [];
+    this.copiaDatos = [];
     const url = 'http://localhost:3030/api/getVocabulario';
 
     return this.http.post<Vocabulario[]>(url, '')
@@ -235,11 +239,12 @@ export class VocabularioComponent implements OnInit {
   }
 
   nuevoVocab(categoria: string) {
+    this.formNuevoVoc.reset();
+    this.textoModalVoc = "Añadir Vocabulario"
     this.displayNuevoVoc = true;
   }
 
   submitNuevoVoc() {
-
     const { kana, significado, categoria } = this.formNuevoVoc.value;
 
     this.mainService.nuevoVocab({ kana: kana, significado: significado, categoria: categoria });
@@ -283,4 +288,46 @@ export class VocabularioComponent implements OnInit {
     }
   }
 
+
+  editarVocab(v: Vocabulario) {
+    this.textoModalVoc = 'Editar Vocabulario';
+    this.displayNuevoVoc = true;
+
+    this.formNuevoVoc.get('id')?.setValue(v.id);
+    this.formNuevoVoc.get('kana')?.setValue(v.kana);
+    this.formNuevoVoc.get('significado')?.setValue(v.significado);
+    this.formNuevoVoc.get('categoria')?.setValue(v.categoria);
+  }
+
+  submitEdVoc() {
+    const { id, kana, significado, categoria } = this.formNuevoVoc.value;
+
+    this.mainService.editarVocab(id, kana, significado, categoria);
+
+    let cambioCategoria = false;
+
+    this.datos = this.datos.map((d: Datos) => {
+      d.datos = d.datos.map((v: Vocabulario) => {
+        if (v.id === id) {
+          if (v.categoria != categoria) {
+            cambioCategoria = true;
+          }
+
+          v.kana = kana;
+          v.significado = significado;
+        }
+        return v;
+      });
+      return d;
+    });
+
+
+    if (cambioCategoria) {
+      this.getVocabulario();
+    }
+
+    this.copiaDatos = this.datos;
+    this.mainService.openSnackBar('Vocabulario editado con éxito (^^)');
+    this.displayNuevoVoc = false;
+  }
 }
