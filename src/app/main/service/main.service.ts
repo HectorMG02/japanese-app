@@ -273,4 +273,11 @@ export class MainService {
       .subscribe((result: any) => {
       });
   }
+
+
+  eliminarGramatica(id: number) {
+    this.http.post(`${this.url}/eliminarGramatica/`, { id: id })
+      .subscribe((result: any) => {
+      });
+  }
 }

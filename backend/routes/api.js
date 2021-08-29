@@ -214,4 +214,23 @@ router.post('/nuevaCategoriaVocabulario', (req, res) => {
     return res.status(200).json(vocabulario);
 });
 
+
+
+router.post('/eliminarGramatica', (req, res) => {
+    const rawdata = fs.readFileSync('db/gramatica.json');
+    let gramatica = JSON.parse(rawdata);
+
+    const { id } = req.body;
+
+    let nuevaGramatica = gramatica.filter(g => g.id !== id);
+
+
+    if (nuevaGramatica.length) {
+        fs.writeFileSync('db/gramatica.json', JSON.stringify(nuevaGramatica));
+    }
+
+    return res.status(200).json(nuevaGramatica);
+});
+
+
 module.exports = router;

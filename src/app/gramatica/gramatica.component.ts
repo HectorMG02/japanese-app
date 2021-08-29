@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MainService } from '../main/service/main.service';
 
 interface Gramatica {
+  id: number;
   particula: string;
   pronunciacion: string;
   info: string;
@@ -60,6 +61,8 @@ interface Gramatica {
   ]
 })
 export class GramaticaComponent {
+  adminMode: number = this.mainService.admin;
+
   gramatica: Gramatica[] = [];
   totalDatos: number = 0;
   aciertos: number = 0;
@@ -112,5 +115,16 @@ export class GramaticaComponent {
 
   }
 
+
+  nuevaGramatica() { }
+
+  editarGramatica() { }
+
+  eliminarGramatica(id: number) {
+    if (confirm("¿Está seguro de que quieres eliminar esto?")) {
+      this.mainService.eliminarGramatica(id);
+      this.gramatica = this.gramatica.filter(g => g.id !== id);
+    }
+  }
 
 }
