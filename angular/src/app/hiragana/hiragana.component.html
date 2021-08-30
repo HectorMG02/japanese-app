@@ -1,0 +1,19 @@
+<div class="row">
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar hiragana" formControlName="buscar"
+            (input)="filtro()" />
+    </form>
+    <div class="col-4 my-3" *ngFor="let item of hiragana">
+        <mat-card>
+            <h1 class="h1Kana text-center">
+                {{ item.kana }}
+            </h1>
+            <hr>
+            <span class="text-center">
+                <h1 class="h1Romaji">
+                    {{ item.romaji }}
+                </h1>
+            </span>
+        </mat-card>
+    </div>
+</div>

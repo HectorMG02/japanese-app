@@ -1,0 +1,97 @@
+<div class="row">
+    <form [formGroup]="miFormulario">
+        <input type="text" class="form-control" placeholder="Buscar kanji" formControlName="buscar"
+            (input)="filtro()" />
+    </form>
+
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <button *ngIf="adminMode" type="button" class="btn btn-primary my-3" data-toggle="modal"
+                data-target="#modalKanji" (click)="accionKanji = 'Crear'">
+                Añadir Kanji
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modal Kanji Nuevo y Editar -->
+    <div class="modal fade" id="modalKanji" tabindex="-1" role="dialog" aria-labelledby="modalKanjiLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalKanjiLabel">{{ accionKanji }} Kanji</h5>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="formularioNuevoKanji">
+                        <input type="text" class="form-control d-none" formControlName="id" />
+
+                        <h6>&nbsp;Kanji</h6>
+                        <input type="text" class="form-control" placeholder="日本" formControlName="kana" />
+
+                        <h6 class="mt-3">&nbsp;Romaji</h6>
+                        <input type="text" class="form-control" placeholder="Nihon" formControlName="romaji" />
+
+                        <h6 class="mt-3">&nbsp;Significado</h6>
+                        <input type="text" class="form-control" placeholder="Japón" formControlName="significado" />
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button *ngIf="accionKanji == 'Crear'; else submitEditar" type="button" (click)="crearKanji()"
+                        [disabled]="formularioNuevoKanji.invalid" class="btn btn-primary"
+                        data-dismiss="modal">Guardar</button>
+
+
+                    <ng-template #submitEditar>
+                        <button type="button" (click)="editarKnaji()" [disabled]="formularioNuevoKanji.invalid"
+                            class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                    </ng-template>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-4 col-md-6 col-xl-4 my-3" *ngFor="let item of kanji">
+        <mat-card>
+            <div *ngIf="adminMode" class="row">
+                <div class="col-10">
+                    <button class="btn btn-warning float-end mb-3 btnEdKanji" (click)="modalModoEditar(item)"
+                        data-toggle="modal" data-target="#modalKanji">✏️</button>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-danger float-end mb-3 btnEdKanji" (click)="deleteKanji(item)">🗑️</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h1 class="h1Kana text-center">
+                        {{ item.kana }}
+                    </h1>
+                </div>
+                <div class="col-6">
+                    <span class="text-center">
+                        <h1 class="h1RomajiKanji">
+                            {{ item.romaji }}
+                        </h1>
+                    </span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 significadoKanji text-center">
+                    <span>
+                        {{ item.significado }}
+                    </span>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

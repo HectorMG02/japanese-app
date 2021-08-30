@@ -1,0 +1,30 @@
+<div class="container text-center">
+    <h1><u>Administración</u></h1>
+</div>
+
+<div class="container container-login my-5">
+    <div class="row">
+        <div class="col-12">
+
+            <form [formGroup]="miFormulario" (ngSubmit)="login()">
+                <label for="">Usuario</label>
+                <input type="text" formControlName="user" class="form-control">
+
+                <span *ngIf="campoEsValido('user')" class="form-text text-danger">El usuario no puede estar
+                    vacío</span>
+                <br><br>
+                <label for="">Contraseña</label>
+                <input type="password" formControlName="password" class="form-control">
+
+
+
+                <div class="row">
+                    <div class="col-12 justify-content-between">
+                        <button type="submit" [disabled]="miFormulario.invalid"
+                            class="float-end btn btn-primary mt-3">Iniciar Sesión</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
