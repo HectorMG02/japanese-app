@@ -2,7 +2,7 @@
     <h1><u>Administración</u></h1>
 </div>
 
-<div class="container container-login my-5">
+<div *ngIf="this.mainService.admin === 0" class="container container-login my-5">
     <div class="row">
         <div class="col-12">
 
@@ -37,3 +37,5 @@
         </div>
     </div>
 </div>
+
+<app-vocabulario *ngIf="this.mainService.admin === 1"></app-vocabulario>

@@ -9,28 +9,32 @@
     </div>
 
     <div class="itemsMenu">
-        <button *ngFor="let item of menuItems;" mat-button class="menuButton">
+        <span *ngFor="let item of menuItems;">
 
-            <span *ngIf="item.nombre != 'Administración' && item.nombre != 'Cerrar sesión';else modoAdmin" [routerLink]="[ item.ruta ]">
+            <button mat-button class="menuButton" *ngIf="item.nombre != 'Administración' && item.nombre != 'Cerrar sesión';else modoAdmin" [routerLink]="[ item.ruta ]">
                 <h5>{{ item.nombre }}</h5>
                  
-            </span>
+            </button>
 
 
            <ng-template #modoAdmin>
-            <h5 *ngIf="this.mainService.admin === 0" [routerLink]="[item.ruta]">
-                <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span>Administración</span>
-            </h5>
+            <button mat-button class="menuButton" *ngIf="this.mainService.admin === 0" [routerLink]="[item.ruta]">
+                <h5>
+                    <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span>Administración</span>
+                </h5>
+            </button>
 
             
-            <h5 *ngIf="this.mainService.admin === 1" (click)="logout()">
+          <button mat-button class="menuButton" *ngIf="this.mainService.admin === 1" (click)="logout()">
+            <h5>
                 <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span>Cerrar sesión</span>
             </h5>
+          </button>
            </ng-template>
            
             
         
-        </button>
+        </span>
 
 
     </div>
@@ -41,23 +45,26 @@
             <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-            <button *ngFor="let item of menuItems;" mat-menu-item routerLinkActive="active">
+            <span *ngFor="let item of menuItems;" routerLinkActive="active">
                 
-                <span *ngIf="item.nombre != 'Administración' && item.nombre != 'Cerrar sesión';else modoAdminMovil" [routerLink]="[item.ruta]">{{ item.nombre }}</span>
+                <button mat-menu-item *ngIf="item.nombre != 'Administración' && item.nombre != 'Cerrar sesión';else modoAdminMovil" [routerLink]="[item.ruta]">{{ item.nombre }}</button>
+
+
 
                 <ng-template #modoAdminMovil>
-                    <h5 *ngIf="admin === 0" [routerLink]="[item.ruta]">
-                        <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span>Administración</span>
-                    </h5>
+                    <button mat-menu-item *ngIf="this.mainService.admin === 0" [routerLink]="[item.ruta]">
+                        <mat-icon class="adminMovil">account_circle</mat-icon>&nbsp;&nbsp;<span>Administración</span>
+                    </button>
         
                     
-                    <h5 *ngIf="admin === 1" (click)="logout()">
-                        <mat-icon class="adminPc">account_circle</mat-icon>&nbsp;&nbsp;<span>Cerrar sesión</span>
-                    </h5>
-                </ng-template>
+                    <button mat-menu-item *ngIf="this.mainService.admin === 1" (click)="logout()">
+                        <mat-icon class="adminMovil">account_circle</mat-icon>&nbsp;&nbsp;<span>Cerrar sesión</span>
+                    </button>
+                   </ng-template>
+                   
 
 
-            </button>
+            </span>
         </mat-menu>
     </div>
 

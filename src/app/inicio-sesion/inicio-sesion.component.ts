@@ -18,7 +18,7 @@ export class InicioSesionComponent {
 
 
   constructor(private fb: FormBuilder,
-    private mainService: MainService,
+    public mainService: MainService,
     private router: Router) { }
 
   campoEsValido(campo: string) {
