@@ -88,7 +88,7 @@ export class GramaticaComponent {
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
-    private mainService: MainService) {
+    public mainService: MainService) {
     this.gramatica = this.getGramatica();
   }
 

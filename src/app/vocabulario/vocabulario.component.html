@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-lg-4">
-        <button *ngIf="adminMode" pButton type="button" class="p-button-success p-button-raised float-end"
+        <button *ngIf="this.mainService.admin === 1" pButton type="button" class="p-button-success p-button-raised float-end"
             (click)="nuevaCategoria()">
             Añadir Categoría
         </button>
@@ -30,25 +30,25 @@
                     <div class="col-4 my-2 mx-2 float-left">
 
 
-                        <button *ngIf="adminMode" pButton type="button"
+                        <button *ngIf="this.mainService.admin === 1" pButton type="button"
                             class="p-button-warning mx-3 my-2 p-button-raised" (click)="editarCategoria(dato.categoria)"
                             label="✏️"></button>
 
 
-                        <button *ngIf="adminMode" (click)="eliminarCategoria(dato.categoria)" pButton type="button"
+                        <button *ngIf="this.mainService.admin === 1" (click)="eliminarCategoria(dato.categoria)" pButton type="button"
                             label="🗑️" class="p-button-danger my-2 p-button-raised"></button>
                     </div>
                     <div class="col-4 text-center">
-                        <h3 *ngIf="adminMode" class="my-3"><strong>
+                        <h3 *ngIf="this.mainService.admin === 1" class="my-3"><strong>
                                 <u>{{ dato.categoria }}</u>
                             </strong></h3>
 
-                        <h3 *ngIf="!adminMode" class="my-2"><strong>
+                        <h3 *ngIf="this.mainService.admin === 0" class="my-2"><strong>
                                 <u>{{ dato.categoria }}</u>
                             </strong></h3>
                     </div>
                     <div class="col-3 my-2">
-                        <button *ngIf="adminMode" pButton type="button" label="➕"
+                        <button *ngIf="this.mainService.admin === 1" pButton type="button" label="➕"
                             class="p-button-primary p-button-raised my-2 float-end"
                             (click)="nuevoVocab(dato.categoria)"></button>
                     </div>
@@ -62,8 +62,8 @@
                     <tr>
                         <th scope="col">Palabra / Frase</th>
                         <th scope="col">Significado</th>
-                        <th scope="col" *ngIf="adminMode">Editar</th>
-                        <th scope="col" *ngIf="adminMode">Eliminar</th>
+                        <th scope="col" *ngIf="this.mainService.admin === 1">Editar</th>
+                        <th scope="col" *ngIf="this.mainService.admin === 1">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -78,7 +78,7 @@
                                     (keyup)="checkRomaji(v.significado, $event)">
                             </ng-template>
                         </td>
-                        <td *ngIf="adminMode && v.significado; else tdVacio1">
+                        <td *ngIf="this.mainService.admin == 1 && v.significado; else tdVacio1">
                             <button pButton type="button" label="✏️" (click)="editarVocab(v)"
                                 class="p-button-warning p-button-raised"></button>
                         </td>
@@ -86,7 +86,7 @@
                             <td></td>
                         </ng-template>
 
-                        <td *ngIf="adminMode && v.significado; else tdVacio2">
+                        <td *ngIf="this.mainService.admin == 1 && v.significado; else tdVacio2">
                             <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"
                                 (click)="eliminarVocab( v.id, v.kana )"></button>
                         </td>

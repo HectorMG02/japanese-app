@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
 
-            <form [formGroup]="miFormulario" (ngSubmit)="login()">
+            <form [formGroup]="miFormulario">
                 <label for="">Usuario</label>
                 <input type="text" formControlName="user" class="form-control">
 
@@ -20,8 +20,17 @@
 
                 <div class="row">
                     <div class="col-12 justify-content-between">
-                        <button type="submit" [disabled]="miFormulario.invalid"
+
+
+                        <button type="submit" (click)="login()" *ngIf="!loginStatus; else loginCorrecto" [disabled]="miFormulario.invalid"
                             class="float-end btn btn-primary mt-3">Iniciar Sesión</button>
+
+                        <ng-template #loginCorrecto>
+                            <button pButton type="button" class="float-end btn p-button-help p-button-outlined mt-3" routerLink="/vocabulario">Ir al
+                                vocabulario</button>
+                        </ng-template>
+
+
                     </div>
                 </div>
             </form>

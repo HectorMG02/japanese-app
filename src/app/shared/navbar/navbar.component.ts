@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MainService } from 'src/app/main/service/main.service';
 
 interface MenuItems {
@@ -34,6 +35,10 @@ interface MenuItems {
 export class NavbarComponent {
 
 
+  admin: number = this.mainService.admin;
+
+  nombreAdmin: string = this.admin != 1 ? "Administración" : "Cerrar sesión"
+
   menuItems: MenuItems[] = [
     {
       nombre: 'あ Hiragana',
@@ -56,21 +61,23 @@ export class NavbarComponent {
       ruta: '/gramatica'
     },
     {
-      nombre: 'Administración',
+      nombre: this.nombreAdmin,
       ruta: '/iniciarSesion'
     }
   ];
 
 
-  admin: number = this.mainService.admin;
 
-  constructor(public mainService: MainService) { }
+  constructor(public mainService: MainService,
+    private router: Router) { }
 
 
+ 
   logout() {
     localStorage.removeItem("loginAdmin");
-
-    return location.href = '/iniciarSesion'
+    this.admin = 0;
+    this.mainService.admin = 0;
+    this.nombreAdmin = 'Administración';
   }
 
 }

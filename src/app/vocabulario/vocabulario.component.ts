@@ -94,7 +94,7 @@ export class VocabularioComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private http: HttpClient,
-    private mainService: MainService,
+    public mainService: MainService,
     private primengConfig: PrimeNGConfig,
     private _snackBar: MatSnackBar) {
     this.vocabulario = this.getVocabulario()
