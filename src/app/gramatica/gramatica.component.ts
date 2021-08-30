@@ -129,9 +129,10 @@ export class GramaticaComponent {
 
 
 
-  eliminarGramatica(id: number) {
+  eliminarGramatica(g: Gramatica) {
+    const { id } = g;
     if (confirm("¿Está seguro de que quieres eliminar esto?")) {
-      this.mainService.eliminarGramatica(id);
+      this.mainService.eliminarGramatica(id); 
       this.gramatica = this.gramatica.filter(g => g.id !== id);
       this.mainService.openSnackBar('Gramática eliminada con éxito (^^)');
     }
