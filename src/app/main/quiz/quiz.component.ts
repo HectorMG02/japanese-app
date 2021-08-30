@@ -19,6 +19,32 @@ interface Acertados {
         height: 100%;
         padding-top: 12px; 
       }
+
+      .mis-quiz::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+    
+      .mis-quiz::-webkit-scrollbar:vertical {
+          width:10px;
+      }
+
+      .mis-quiz::-webkit-scrollbar-button:increment,.mis-quiz::-webkit-scrollbar-button {
+        display: none;
+      } 
+      
+      .mis-quiz::-webkit-scrollbar:horizontal {
+          height: 10px;
+      }
+      
+      .mis-quiz::-webkit-scrollbar-thumb {
+          background-color: #797979;
+          border-radius: 20px;
+          border: 2px solid #f1f2f3;
+      }
+      
+      .mis-quiz::-webkit-scrollbar-track {
+          border-radius: 10px;  
+      }
     `
   ]
 })

@@ -88,6 +88,23 @@ html, body {
     width: 70%;
 }
 
+
+@media(max-width: 2560px){
+    .quiz-kanji {
+        height: 1042px;
+        max-height: 1042px;
+    }
+    
+    .quiz-hiragana {
+        max-height: 490px;
+    }
+    
+    .quiz-katakana {
+        max-height: 490px;
+    }
+}
+
+
 /* media query for mobile devices */
 
 @media (max-width: 1200px) {
