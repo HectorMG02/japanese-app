@@ -33,7 +33,7 @@ export class MainService {
 
   login_status: number = 0;
   admin: number = localStorage.getItem('loginAdmin') ? 1 : 0;
-  public url: string = 'https://morning-ocean-74067.herokuapp.com/api';
+  public url: string = '195.110.59.5:2090/api';
 
   hiragana: Kana[] = [
     { id: 1, kana: 'あ', romaji: 'a' },
