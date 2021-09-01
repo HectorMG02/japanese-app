@@ -70,6 +70,7 @@ export class QuizComponent {
       // order the hiragana array by the field id
       this.hiragana = this.hiragana.sort((a, b) => a.id - b.id);
       this.katakana = this.katakana.sort((a, b) => a.id - b.id);
+      this.kanji = this.kanji.sort((a: any, b: any) => a.id - b.id);
 
     } else if (tipo == 'Examen') {
       this.modoQuiz = 'Examen';
@@ -79,6 +80,10 @@ export class QuizComponent {
       });
 
       this.katakana = this.katakana.sort(() => {
+        return 0.5 - Math.random();
+      });
+
+      this.kanji = this.kanji.sort(() => {
         return 0.5 - Math.random();
       });
 
