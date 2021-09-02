@@ -158,11 +158,13 @@ export class GramaticaComponent {
 
     this.mainService.editarGramatica(id, particula, info, pronunciacion);
 
-    location.reload();
-
-
+ 
     this.mainService.openSnackBar('Gramática editada con éxito (^^)');
     this.display = false;
+
+    setTimeout(() => {
+      this.getGramatica();
+    }, 500);
   }
 
   nuevaGramatica() {
@@ -180,8 +182,9 @@ export class GramaticaComponent {
     this.mainService.openSnackBar('Gramática añadida con éxito (^^)');
     this.display = false;
 
-    
-    location.reload();
+    setTimeout(() => {
+      this.getGramatica();
+    }, 500);
   }
 
 }

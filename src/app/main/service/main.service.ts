@@ -33,7 +33,7 @@ export class MainService {
 
   login_status: number = 0;
   admin: number = localStorage.getItem('loginAdmin') ? 1 : 0;
-  public url: string = 'http://localhost:2090/api'; // environment.url;
+  public url: string = environment.url;
 
   hiragana: Kana[] = [
     { id: 1, kana: 'あ', romaji: 'a' },
