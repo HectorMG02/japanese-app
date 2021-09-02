@@ -264,22 +264,14 @@ export class VocabularioComponent implements OnInit {
     });
 
 
-    this.datos.map((d: Datos) => {
-      if (d.categoria === categoria) {
-        d.datos.unshift({
-          id: totalDatos + 1,
-          kana: kana,
-          significado: significado,
-          categoria: categoria
-        });
-      }
-      return d;
-    });
-
     this.copiaDatos = this.datos;
 
     this.mainService.openSnackBar('Vocabulario añadido con éxito (^^)');
     this.displayNuevoVoc = false;
+
+    setTimeout(() => {
+      this.getVocabulario();
+    }, 500);
   }
 
 
@@ -312,19 +304,14 @@ export class VocabularioComponent implements OnInit {
     const { id, kana, significado, categoria } = this.formNuevoVoc.value;
 
     this.mainService.editarVocab(id, kana, significado, categoria);
-
-    this.datos.forEach((d: Datos) => {
-      d.datos = d.datos.map((v: Vocabulario) => {
-        if (v.id === id && v.categoria != categoria) {
-          location.reload();
-        }
-        return v;
-      });
-    });
-
-    //location.reload();
+    
     this.mainService.openSnackBar('Vocabulario editado con éxito (^^)');
     this.displayNuevoVoc = false;
+
+    setTimeout(() => {
+      this.getVocabulario();
+    }, 500);
+
   }
 
 
@@ -340,14 +327,14 @@ export class VocabularioComponent implements OnInit {
 
     this.mainService.nuevaCategoria(nombreCategoria);
 
-    this.datos.unshift({
-      id: this.datos.length + 1,
-      categoria: nombreCategoria,
-      datos: []
-    });
 
     this.copiaDatos = this.datos;
     this.mainService.openSnackBar('Categoría creada con éxito (^^)');
     this.display = false;
+
+    setTimeout(() => {
+      this.getVocabulario();
+    }, 500);
+
   }
 }

@@ -158,14 +158,7 @@ export class GramaticaComponent {
 
     this.mainService.editarGramatica(id, particula, info, pronunciacion);
 
-    this.gramatica = this.gramatica.map(g => {
-      if (g.id === id) {
-        g.particula = particula;
-        g.info = info;
-        g.pronunciacion = pronunciacion;
-      }
-      return g;
-    });
+    location.reload();
 
 
     this.mainService.openSnackBar('Gramática editada con éxito (^^)');
@@ -184,16 +177,11 @@ export class GramaticaComponent {
 
     this.mainService.crearGramatica(particula, info, pronunciacion);
 
-    this.gramatica.unshift({
-      id: this.gramatica.length + 1,
-      particula,
-      pronunciacion,
-      info
-    });
-
     this.mainService.openSnackBar('Gramática añadida con éxito (^^)');
     this.display = false;
 
+    
+    location.reload();
   }
 
 }

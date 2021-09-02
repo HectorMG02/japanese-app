@@ -21,7 +21,7 @@ export class KanjiComponent {
   });
 
   formularioNuevoKanji: FormGroup = this.fb.group({
-    id: ['', [Validators.required]],
+    id: [''],
     kana: ['', [Validators.required]],
     romaji: ['', [Validators.required]],
     significado: ['', [Validators.required]]

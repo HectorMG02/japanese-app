@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 interface Kana {
   id: number;
@@ -27,13 +28,12 @@ export class MainService {
     this.http.post<any[]>(`${this.url}/getKanjis`, '')
       .subscribe(result => {
         result.forEach(r => this.kanji.push(r));
-      });
-
+      }); 
   }
 
   login_status: number = 0;
   admin: number = localStorage.getItem('loginAdmin') ? 1 : 0;
-  public url: string = 'https://morning-ocean-74067.herokuapp.com/api';
+  public url: string = 'http://localhost:2090/api'; // environment.url;
 
   hiragana: Kana[] = [
     { id: 1, kana: 'あ', romaji: 'a' },
@@ -194,13 +194,13 @@ export class MainService {
     }, 2000);
   }
 
-  login(user: string, password: string) {
+  async login(user: string, password: string) {
     const data = {
       user: user,
       password: password,
     };
 
-    this.http.post<any[]>(`${this.url}/loginAdmin`, data)
+    await this.http.post<any[]>(`${this.url}/loginAdmin`, data)
       .subscribe(result => {
         this.login_status = Number(result);
       });
@@ -208,8 +208,8 @@ export class MainService {
     return this.login_status;
   }
 
-  deleteKanji(item: Kana): void {
-    this.http.post(`${this.url}/deleteKanji/`, item)
+  async deleteKanji(item: Kana): Promise<void> {
+    await this.http.post(`${this.url}/deleteKanji/`, item)
       .subscribe((result: any) => {
         this.kanji = [];
         result.forEach((r: any) => this.kanji.push(r));
@@ -217,8 +217,8 @@ export class MainService {
   }
 
 
-  crearKanji(value: any): void {
-    this.http.post(`${this.url}/createKanji/`, value)
+  async crearKanji(value: any): Promise<void> {
+    await this.http.post(`${this.url}/createKanji/`, value)
       .subscribe((result: any) => {
         this.kanji = [];
         result.forEach((r: any) => this.kanji.push(r));
@@ -226,8 +226,8 @@ export class MainService {
   }
 
 
-  editarKanji(value: any): void {
-    this.http.post(`${this.url}/editKanji/`, value)
+  async editarKanji(value: any): Promise<void> {
+    await this.http.post(`${this.url}/editKanji/`, value)
       .subscribe((result: any) => {
         this.kanji = [];
         result.forEach((r: any) => this.kanji.push(r));
@@ -235,61 +235,61 @@ export class MainService {
   }
 
 
-  eliminarCategoria(categoria: string): void {
-    this.http.post(`${this.url}/eliminarCategoriaVocabulario/`, { categoria: categoria })
+  async eliminarCategoria(categoria: string): Promise<void> {
+    await this.http.post(`${this.url}/eliminarCategoriaVocabulario/`, { categoria: categoria })
       .subscribe((result: any) => {
       });
   }
 
 
-  editCategoria(oldName: string, newName: string): void {
-    this.http.post(`${this.url}/editarCategoriaVocabulario/`, { oldName: oldName, newName: newName })
+  async editCategoria(oldName: string, newName: string): Promise<void> {
+    await this.http.post(`${this.url}/editarCategoriaVocabulario/`, { oldName: oldName, newName: newName })
       .subscribe((result: any) => {
       });
   }
 
 
-  nuevoVocab(vocab: Vocabulario): void {
-    this.http.post(`${this.url}/nuevoVocabulario/`, vocab)
+  async nuevoVocab(vocab: Vocabulario): Promise<void> {
+    await this.http.post(`${this.url}/nuevoVocabulario/`, vocab)
       .subscribe((result: any) => {
       });
   }
 
-  eliminarVocab(id: number): void {
-    this.http.post(`${this.url}/eliminarVocabulario/`, { id: id })
+  async eliminarVocab(id: number): Promise<void> {
+    await this.http.post(`${this.url}/eliminarVocabulario/`, { id: id })
       .subscribe((result: any) => {
       });
   }
 
-  editarVocab(id: number, kana: string, significado: string, categoria: string) {
-    this.http.post(`${this.url}/editarVocabulario/`, { id: id, kana: kana, significado: significado, categoria: categoria })
-      .subscribe((result: any) => {
-      });
-  }
-
-
-  nuevaCategoria(nombre: string) {
-    this.http.post(`${this.url}/nuevaCategoriaVocabulario/`, { nombre: nombre })
+  async editarVocab(id: number, kana: string, significado: string, categoria: string) {
+    await this.http.post(`${this.url}/editarVocabulario/`, { id: id, kana: kana, significado: significado, categoria: categoria })
       .subscribe((result: any) => {
       });
   }
 
 
-  eliminarGramatica(id: number) {
-    this.http.post(`${this.url}/eliminarGramatica/`, { id: id })
+  async nuevaCategoria(nombre: string) {
+    await this.http.post(`${this.url}/nuevaCategoriaVocabulario/`, { nombre: nombre })
       .subscribe((result: any) => {
       });
   }
 
 
-  editarGramatica(id: number, particula: string, info: string, pronunciacion: string) {
-    this.http.post(`${this.url}/editarGramatica/`, { id: id, particula: particula, info: info, pronunciacion: pronunciacion })
+  async eliminarGramatica(id: number) {
+    await this.http.post(`${this.url}/eliminarGramatica/`, { id: id })
       .subscribe((result: any) => {
       });
   }
 
-  crearGramatica(particula: string, info: string, pronunciacion: string) {
-    this.http.post(`${this.url}/crearGramatica/`, { particula: particula, info: info, pronunciacion: pronunciacion })
+
+  async editarGramatica(id: number, particula: string, info: string, pronunciacion: string) {
+    await this.http.post(`${this.url}/editarGramatica/`, { id: id, particula: particula, info: info, pronunciacion: pronunciacion })
+      .subscribe((result: any) => {
+      });
+  }
+
+  async crearGramatica(particula: string, info: string, pronunciacion: string) {
+    await this.http.post(`${this.url}/crearGramatica/`, { particula: particula, info: info, pronunciacion: pronunciacion })
       .subscribe((result: any) => {
       });
   }
