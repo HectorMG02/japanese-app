@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:2090/api'
+  url: 'https://japanese-backend.glitch.me/api'
 };
 
 /*

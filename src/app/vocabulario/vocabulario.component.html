@@ -23,7 +23,7 @@
     </form>
 
 
-    <div *ngFor="let dato of datos" class="my-3 col-xl-5 col-md-5 col-xs-12 colVocabulario">
+    <div *ngFor="let dato of datos; let i = index" class="my-3 col-xl-5 col-md-5 col-xs-12 colVocabulario">
         <div class="row">
             <div class="col-12 text-center">
                 <div class="row">
@@ -54,6 +54,8 @@
             </div>
         </div>
 
+        <input type="text" class="form-control mb-3" (input)="filtroInterno($event, i, dato.categoria)" placeholder="Buscar">
+
         <div class="zonaTabla">
             <table class="table">
                 <thead class="thead-dark text-center">
@@ -76,23 +78,19 @@
                                     (keyup)="checkRomaji(v.significado, $event)">
                             </ng-template>
                         </td>
-                        <td *ngIf="this.mainService.admin == 1 && v.significado; else tdVacio1">
+                        <td *ngIf="this.mainService.admin == 1 && v.significado;">
                             <button pButton type="button" label="✏️" (click)="editarVocab(v)"
                                 class="p-button-warning p-button-raised"></button>
                         </td>
-                        <ng-template #tdVacio1>
-                            <td></td>
-                        </ng-template>
+                         
 
-                        <td *ngIf="this.mainService.admin == 1 && v.significado; else tdVacio2">
+                        <td *ngIf="this.mainService.admin == 1 && v.significado;">
                             <button pButton type="button" label="🗑️" class="p-button-danger p-button-raised"
                                 (click)="eliminarVocab( v.id, v.kana )"></button>
                         </td>
 
 
-                        <ng-template #tdVacio2>
-                            <td></td>
-                        </ng-template>
+                       
 
                     </tr>
 

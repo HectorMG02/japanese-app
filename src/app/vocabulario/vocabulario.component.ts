@@ -38,6 +38,7 @@ interface Datos {
       .zonaTabla{
         height: 300px;
         max-height:300px;
+        width: 100%;
         overflow-y  : auto!important;
       }
 
@@ -76,7 +77,7 @@ export class VocabularioComponent implements OnInit {
 
   vocabulario: Vocabulario[];
   categorias: string[] = [];
-  datos: Datos[] = [];
+  datos: any[] = [];
   copiaDatos: Datos[] = [];
 
   modoQuiz: string = "Estudio";
@@ -131,7 +132,7 @@ export class VocabularioComponent implements OnInit {
     } else if (tipo == 'Examen') {
       this.modoQuiz = 'Examen';
 
-      this.datos = this.datos.filter(d => d.datos?.sort((a, b) => 0.5 - Math.random()).slice(0, 10));
+      this.datos = this.datos.filter(d => d.datos?.sort((a: any, b: any) => 0.5 - Math.random()).slice(0, 10));
     }
   }
 
@@ -166,10 +167,10 @@ export class VocabularioComponent implements OnInit {
 
         // delete duplicated elements from this.datos.datos array
         this.datos.forEach(d => {
-          d.datos = d.datos.filter((v, i, a) => a.findIndex(t => (t.id === v.id)) === i);
+          d.datos = d.datos.filter((v: any, i: any, a: any) => a.findIndex((t: any) => (t.id === v.id)) === i);
         });
 
-
+        localStorage.setItem("datosJapaneseApp", JSON.stringify(this.datos));
         this.copiaDatos = this.datos;
 
       });
@@ -177,13 +178,12 @@ export class VocabularioComponent implements OnInit {
 
   filtro() {
     const buscar = this.miFormulario.value.buscar;
-
+    
     if (buscar) {
-      this.datos = this.copiaDatos.filter(d => d.categoria.toLowerCase().includes(buscar.toLowerCase()) || d.datos.filter(v => v.kana.toLowerCase().includes(buscar.toLowerCase()) || v.significado.toLowerCase().includes(buscar.toLowerCase())).length > 0);
+      this.datos = this.copiaDatos.filter(d => d.categoria.toLowerCase().includes(buscar.toLowerCase()) || d.datos.filter(i => String(i.kana).includes(buscar)).length > 0 || d.datos.filter(i => String(i.significado).includes(buscar)).length > 0);
     } else {
-      this.datos = this.copiaDatos
+      this.datos = this.copiaDatos;
     }
-
   }
 
   checkRomaji(significado: string, e: any) {
@@ -304,7 +304,7 @@ export class VocabularioComponent implements OnInit {
     const { id, kana, significado, categoria } = this.formNuevoVoc.value;
 
     this.mainService.editarVocab(id, kana, significado, categoria);
-    
+
     this.mainService.openSnackBar('Vocabulario editado con éxito (^^)');
     this.displayNuevoVoc = false;
 
@@ -335,6 +335,37 @@ export class VocabularioComponent implements OnInit {
     setTimeout(() => {
       this.getVocabulario();
     }, 500);
+  }
+
+
+  filtroInterno(e: any, idx: number, categoria: string) {
+    const buscar = e.target.value; 
+    let datosCopia = JSON.parse(localStorage.getItem('datosJapaneseApp') || this.getVocabulario());
+
+    if (buscar) {
+      let existentes: any[] = [];
+      
+       datosCopia.forEach((c: any) => {
+         c.datos.forEach((d: any) => {
+          if (String(d.kana).includes(buscar) || String(d.significado).includes(buscar)) {
+            existentes.push(d);
+          }
+         });
+      });
+
+
+      // delete the elements with the same id from existentes
+      existentes = existentes.filter((v: any, i: number) => {
+        return existentes.indexOf(v) === i;
+      });
+ 
+
+      this.datos[idx].datos = existentes.filter((d: any) => String(d.categoria).includes(categoria));
+    }else{
+      this.datos = datosCopia;
+    }
+
 
   }
 }
+
