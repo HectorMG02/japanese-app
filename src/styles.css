@@ -165,9 +165,9 @@ html, body {
     }
 }
 
-@media (max-width: 280px) {
+@media (max-width: 400px) {
     .btnMenuMovil {
-        margin-left: 5%!important;
+        margin-left: 18%!important;
     }
 }
 
