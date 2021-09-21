@@ -164,3 +164,11 @@ html, body {
         margin-left: 35%!important;
     }
 }
+
+@media (max-width: 280px) {
+    .btnMenuMovil {
+        margin-left: 5%!important;
+    }
+}
+
+
